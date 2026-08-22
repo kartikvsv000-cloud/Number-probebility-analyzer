@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Number Probability Analyzer</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0b0d10;color:#f5f7fa;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+.wrap{max-width:820px;margin:auto;padding:16px}.title{font-size:25px;font-weight:800}.sub{color:#aab1ba;font-size:13px;margin:4px 0 14px}
+.card{background:#171a1f;border:1px solid #30353d;border-radius:16px;padding:14px;margin:10px 0}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.label{font-size:11px;color:#9aa3ad;letter-spacing:.5px}.value{font-size:25px;font-weight:800;margin-top:3px}
+.tabs{display:flex;gap:6px;overflow:auto;margin:8px 0 12px}.tab{white-space:nowrap;padding:10px 13px;border-radius:11px;border:1px solid #363c45;background:#181c21;color:#bfc5cc;font-weight:700}.tab.active{background:#303640;color:#fff}
+.buttons{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}.btn{min-height:54px;border:1px solid #363c45;border-radius:12px;background:#22262c;color:#fff;font-size:20px;font-weight:800}.btn:active{transform:scale(.97)}
+.actions{display:flex;gap:8px;margin-top:9px}.action{flex:1;padding:11px;border-radius:10px;border:1px solid #363c45;background:#20242a;color:#fff}
+.row{display:flex;justify-content:space-between;font-size:13px;margin-top:9px}.bar{height:8px;background:#30353d;border-radius:8px;margin-top:4px;overflow:hidden}.fill{height:100%;background:#8c96a3}
+.history{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.pill{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;border:1px solid #3a4048;font-weight:800}
+.note{font-size:13px;color:#aeb5bd;line-height:1.5}.good{color:#4bd184}.bad{color:#ff6868}.violet{color:#c084ff}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:8px 5px;border-bottom:1px solid #2b3037;text-align:left}th{color:#9aa3ad}
+.hide{display:none}.badge{display:inline-block;padding:4px 8px;border-radius:8px;background:#252a31;margin:2px;font-size:12px}
+@media(min-width:650px){.grid{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="title">Number Probability Analyzer</div>
+  <div class="sub">0–4 = Small • 5–9 = Big • Red/Green/Violet • Combined analysis</div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="dash">Dashboard</button>
+    <button class="tab" data-tab="patterns">Patterns</button>
+    <button class="tab" data-tab="streaks">Streaks</button>
+    <button class="tab" data-tab="history">History</button>
+  </div>
+
+  <section id="dash">
+    <div class="grid">
+      <div class="card"><div class="label">TOTAL DATA</div><div id="total" class="value">0</div></div>
+      <div class="card"><div class="label">SMALL</div><div id="small" class="value">—</div></div>
+      <div class="card"><div class="label">BIG</div><div id="big" class="value">—</div></div>
+      <div class="card"><div class="label">LATEST</div><div id="latest" class="value">—</div></div>
+    </div>
+
+    <div class="card">
+      <b>ENTER RESULT</b>
+      <div class="buttons" id="buttons"></div>
+      <div class="actions"><button class="action" id="undo">Undo</button><button class="action" id="clear">Clear All</button></div>
+    </div>
+
+    <div class="grid">
+      <div class="card"><div class="label">NEXT SMALL</div><div id="nextSmall" class="value">—</div></div>
+      <div class="card"><div class="label">NEXT BIG</div><div id="nextBig" class="value">—</div></div>
+      <div class="card"><div class="label">TOP DIGIT</div><div id="top" class="value">—</div></div>
+      <div class="card"><div class="label">CONFIDENCE</div><div id="confidence" class="value">—</div></div>
+    </div>
+
+    <div class="card"><b>0–9 PROBABILITY / FREQUENCY</b><div id="freq"></div></div>
+    <div class="card"><b>COLOR PROBABILITY</b><div id="colors" class="note">Need more data.</div></div>
+    <div class="card"><b>AUTO PREDICTION TRACKING</b><div id="prediction" class="note">After enough data, the system records its previous category prediction and compares it with the next actual result.</div></div>
+  </section>
+
+  <section id="patterns" class="hide">
+    <div class="card"><b>CURRENT NUMBER → NEXT</b><div id="transition" class="note">Enter at least 2 results.</div></div>
+    <div class="card"><b>BIG / SMALL TRANSITIONS</b><div id="bsTrans" class="note">Need more data.</div></div>
+    <div class="card"><b>COLOR TRANSITIONS</b><div id="colorTrans" class="note">Need more data.</div></div>
+    <div class="card"><b>RECENT vs OVERALL</b><div id="recent" class="note">Need more data.</div></div>
+    <div class="card"><b>COMBINED PATTERN</b><div id="combined" class="note">Need more data.</div></div>
+  </section>
+
+  <section id="streaks" class="hide">
+    <div class="card"><b>ALL CURRENT STREAKS</b><div id="currentStreaks" class="note">No data yet.</div></div>
+    <div class="card"><b>WIN / LOSS STREAK</b><div id="winloss" class="note">Prediction tracking will appear here after predictions have been evaluated.</div></div>
+    <div class="card"><b>LONGEST STREAKS IN DATA</b><div id="longest" class="note">No data yet.</div></div>
+    <div class="card"><b>STREAK WARNING</b><div id="warning" class="note">No data yet.</div></div>
+  </section>
+
+  <section id="history" class="hide">
+    <div class="card"><b>RECENT HISTORY</b><div id="historyList" class="history"></div></div>
+    <div class="card"><b>FULL SEQUENCE</b><div id="fullHistory" class="note">No results yet.</div></div>
+  </section>
+
+  <div class="card"><b>IMPORTANT</b><div class="note">All results are statistical estimates. A streak does not mean a reversal is due, and a detected pattern may be coincidence or weaken later.</div></div>
+</div>
+
+<script>
+(()=> {
+let data=[];
+let predictionRecords=[];
+
+const $=id=>document.getElementById(id);
+const isSmall=n=>n<=4;
+const getColor=n=>n===0?'Violet+Red':n===5?'Violet':n%2===0?'Red':'Green';
+const category=n=>isSmall(n)?'Small':'Big';
+const pct=(a,b)=>b?Math.round(a/b*100):0;
+
+function streak(arr, fn){
+ if(!arr.length)return {value:null,len:0};
+ const v=fn(arr[arr.length-1]); let len=1;
+ for(let i=arr.length-2;i>=0 && fn(arr[i])===v;i--)len++;
+ return {value:v,len};
+}
+function longest(arr,fn){
+ let best={value:null,len:0}, cur=null,len=0;
+ arr.forEach(x=>{let v=fn(x);if(v===cur)len++;else{cur=v;len=1}if(len>best.len)best={value:v,len}});
+ return best;
+}
+function categoryPrediction(){
+ if(data.length<2)return null;
+ const last=data[data.length-1], counts=Array(10).fill(0);
+ for(let i=0;i<data.length-1;i++)if(data[i]===last)counts[data[i+1]]++;
+ const total=counts.reduce((a,b)=>a+b,0);
+ if(!total)return null;
+ const smallCount=counts.slice(0,5).reduce((a,b)=>a+b,0);
+ return {small:pct(smallCount,total),big:pct(total-smallCount,total),counts,total,last};
+}
+function createPredictionSnapshot(){
+ const p=categoryPrediction();
+ if(!p)return null;
+ return {expected:p.small>=p.big?'Small':'Big', expectedDigit:p.counts.indexOf(Math.max(...p.counts)), small:p.small,big:p.big};
+}
+
+for(let n=0;n<10;n++){
+ const b=document.createElement('button');b.className='btn';b.type='button';b.textContent=n;
+ b.addEventListener('click',()=>addResult(n));$('buttons').appendChild(b);
+}
+$('undo').onclick=()=>{if(data.length){data.pop();predictionRecords.pop();render()}};
+$('clear').onclick=()=>{data=[];predictionRecords=[];render()};
+
+function addResult(n){
+ if(data.length>=2){
+   const snap=createPredictionSnapshot();
+   if(snap){
+     predictionRecords.push({prediction:snap,actual:n,win:snap.expected===category(n),digitWin:snap.expectedDigit===n});
+   }
+ }
+ data.push(n);render();
+}
+
+document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{
+ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');
+ ['dash','patterns','streaks','history'].forEach(id=>$(id).classList.toggle('hide',id!==btn.dataset.tab));
+}));
+
+function render(){
+ const N=data.length,s=data.filter(isSmall).length;
+ $('total').textContent=N;$('small').textContent=N?pct(s,N)+'%':'—';$('big').textContent=N?pct(N-s,N)+'%':'—';$('latest').textContent=N?data[N-1]:'—';
+
+ const counts=Array(10).fill(0);data.forEach(n=>counts[n]++);
+ $('freq').innerHTML=counts.map((v,n)=>`<div class="row"><span>${n} • ${category(n)} • ${getColor(n)}</span><b>${v} (${pct(v,N)}%)</b></div><div class="bar"><div class="fill" style="width:${pct(v,N)}%"></div></div>`).join('');
+
+ const cc={Red:0,Green:0,Violet:0,'Violet+Red':0};
+ data.forEach(n=>cc[getColor(n)]++);
+ $('colors').innerHTML=N?Object.entries(cc).map(([k,v])=>`<span class="badge">${k}: ${pct(v,N)}%</span>`).join(''):'Need more data.';
+
+ const p=categoryPrediction();
+ if(p){
+   $('nextSmall').textContent=p.small+'%';$('nextBig').textContent=p.big+'%';
+   const mx=Math.max(...p.counts), tops=p.counts.map((v,i)=>v===mx&&v?i:null).filter(v=>v!==null);
+   $('top').textContent=tops.length?tops.join(', ')+' ('+pct(mx,p.total)+'%)':'—';
+ }else{$('nextSmall').textContent='—';$('nextBig').textContent='—';$('top').textContent='—'}
+ $('confidence').textContent=N<30?'Low':N<100?'Medium':'Higher';
+
+ if(predictionRecords.length){
+   const wins=predictionRecords.filter(x=>x.win).length, dw=predictionRecords.filter(x=>x.digitWin).length;
+   let w=0,l=0;for(let i=predictionRecords.length-1;i>=0;i--){if(predictionRecords[i].win)w++;else break}
+   for(let i=predictionRecords.length-1;i>=0;i--){if(!predictionRecords[i].win)l++;else break}
+   $('prediction').innerHTML=`Category accuracy: <b>${pct(wins,predictionRecords.length)}%</b> (${wins}/${predictionRecords.length})<br>Digit accuracy: <b>${pct(dw,predictionRecords.length)}%</b> (${dw}/${predictionRecords.length})<br>Current: ${w?'<span class="good">WIN × '+w+'</span>':'<span class="bad">LOSS × '+l+'</span>'}`;
+ }else $('prediction').textContent='Prediction tracking will start after enough historical data exists.';
+
+ renderPatterns();renderStreaks();renderHistory();
+}
+
+function renderPatterns(){
+ const N=data.length;
+ if(N<2){$('transition').textContent='Enter at least 2 results.';return}
+ const p=categoryPrediction();
+ $('transition').textContent=p?'After '+p.last+': '+p.counts.map((v,i)=>v?`${i}=${v}× (${pct(v,p.total)}%)`:null).filter(Boolean).join(' • '):'No transition history for current number.';
+
+ const bt={BB:0,BS:0,SB:0,SS:0};
+ const ct={};
+ for(let i=0;i<N-1;i++){bt[(isSmall(data[i])?'S':'B')+(isSmall(data[i+1])?'S':'B')]++;const k=getColor(data[i])+' → '+getColor(data[i+1]);ct[k]=(ct[k]||0)+1}
+ $('bsTrans').innerHTML=Object.entries(bt).map(([k,v])=>`<span class="badge">${k}: ${v}</span>`).join('')||'Need more data.';
+ $('colorTrans').innerHTML=Object.entries(ct).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([k,v])=>`<span class="badge">${k}: ${v}</span>`).join('')||'Need more data.';
+
+ const recent=data.slice(-20),rs=recent.filter(isSmall).length,overall=safeSmall(data);
+ const diff=Math.abs(pct(rs,recent.length)-pct(overall,N));
+ $('recent').textContent=`Last ${recent.length}: Small ${pct(rs,recent.length)}%, Big ${pct(recent.length-rs,recent.length)}%. Overall: Small ${pct(overall,N)}%, Big ${pct(N-overall,N)}%. `+(diff>=15?'Recent behavior differs noticeably; pattern may be weakening.':'No major shift detected.');
+
+ const sizeSt=streak(data,category), colSt=streak(data,getColor);
+ $('combined').innerHTML=`Latest combined state: <b>${data[N-1]} = ${category(data[N-1])} + ${getColor(data[N-1])}</b><br>Current category streak: ${sizeSt.value} × ${sizeSt.len}; color streak: ${colSt.value} × ${colSt.len}.`;
+}
+function safeSmall(a){return a.filter(isSmall).length}
+
+function renderStreaks(){
+ const N=data.length;
+ if(!N){$('currentStreaks').textContent='No data yet.';$('winloss').textContent='No prediction results yet.';$('longest').textContent='No data yet.';return}
+ const ns=streak(data,x=>x), ss=streak(data,category), cs=streak(data,getColor);
+ $('currentStreaks').innerHTML=`<b>Number:</b> ${ns.value} × ${ns.len}<br><b>Size:</b> ${ss.value} × ${ss.len}<br><b>Color:</b> ${cs.value} × ${cs.len}<br><b>Combined:</b> ${data[N-1]} + ${category(data[N-1])} + ${getColor(data[N-1])} × ${Math.min(ss.len,cs.len)} aligned result(s).`;
+
+ const ls=longest(data,category),lc=longest(data,getColor),ln=longest(data,x=>x);
+ $('longest').innerHTML=`Longest Size: ${ls.value} × ${ls.len}<br>Longest Color: ${lc.value} × ${lc.len}<br>Longest Same Number: ${ln.value} × ${ln.len}`;
+
+ if(predictionRecords.length){
+   let w=0,l=0;for(let i=predictionRecords.length-1;i>=0;i--){if(predictionRecords[i].win)w++;else break}
+   for(let i=predictionRecords.length-1;i>=0;i--){if(!predictionRecords[i].win)l++;else break}
+   $('winloss').innerHTML=`Current prediction streak: ${w?'<span class="good">WIN × '+w+'</span>':'<span class="bad">LOSS × '+l+'</span>'}. Total evaluated predictions: ${predictionRecords.length}.`;
+ }else $('winloss').textContent='Not enough evaluated predictions yet.';
+
+ const max=Math.max(ss.len,cs.len,ns.len);
+ $('warning').textContent=max>=5?'⚠️ A 5+ streak is currently active. Treat it as descriptive evidence only; do not assume reversal is due.':max>=3?'A 3–4 result streak is active.':'No 3+ current streak.';
+}
+function renderHistory(){
+ $('historyList').innerHTML=data.slice(-100).map(n=>`<span class="pill">${n}</span>`).join('')||'<span class="note">No results yet.</span>';
+ $('fullHistory').textContent=data.length?data.join(' → '):'No results yet.';
+}
+render();
+})();
+</script>
+</body>
+</html>
