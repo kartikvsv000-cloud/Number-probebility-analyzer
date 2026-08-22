@@ -1,9 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Number Probability Analyzer</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Probability Analyzer V3</title>
 
 <style>
 *{box-sizing:border-box}
@@ -12,247 +12,168 @@ body{
   margin:0;
   background:#0b0d10;
   color:#f5f7fa;
-  font-family:system-ui,-apple-system,Segoe UI,sans-serif
+  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
 }
 
 .wrap{
-  max-width:850px;
+  max-width:900px;
   margin:auto;
-  padding:14px
+  padding:14px;
 }
 
-.title{
+h1{
+  margin:5px 0;
   font-size:25px;
-  font-weight:800
 }
 
 .sub{
-  color:#aab1ba;
+  color:#9aa3ad;
   font-size:13px;
-  margin:4px 0 14px
+  margin-bottom:15px;
 }
 
 .card{
   background:#171a1f;
   border:1px solid #30353d;
   border-radius:16px;
-  padding:14px;
-  margin:10px 0
+  padding:16px;
+  margin:12px 0;
 }
 
 .grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:10px
+  gap:10px;
+}
+
+.stat{
+  background:#1d2128;
+  border:1px solid #30353d;
+  border-radius:14px;
+  padding:15px;
 }
 
 .label{
-  font-size:11px;
   color:#9aa3ad;
-  letter-spacing:.5px
+  font-size:12px;
+  text-transform:uppercase;
 }
 
 .value{
-  font-size:25px;
+  font-size:26px;
   font-weight:800;
-  margin-top:3px
+  margin-top:5px;
 }
 
-.tabs{
-  display:flex;
-  gap:6px;
-  overflow:auto;
-  margin:8px 0 12px
+button{
+  border:0;
+  border-radius:12px;
+  padding:15px;
+  font-size:18px;
+  font-weight:700;
+  background:#222731;
+  color:white;
+  border:1px solid #353b45;
 }
 
-.tab{
-  white-space:nowrap;
-  padding:10px 13px;
-  border-radius:11px;
-  border:1px solid #363c45;
-  background:#181c21;
-  color:#bfc5cc;
-  font-weight:700
+button:active{
+  transform:scale(.97);
 }
 
-.tab.active{
-  background:#303640;
-  color:#fff
-}
-
-.buttons{
+.numbers{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:8px;
-  margin-top:12px
 }
 
-.btn{
-  min-height:54px;
-  border:1px solid #363c45;
-  border-radius:12px;
-  background:#22262c;
-  color:#fff;
-  font-size:20px;
-  font-weight:800
+.analysis{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
 }
 
-.btn:active{
-  transform:scale(.97)
+.analysis .stat{
+  text-align:center;
 }
 
-.actions{
-  display:flex;
-  gap:8px;
-  margin-top:9px
+.big{
+  color:#ffb84d;
 }
 
-.action{
-  flex:1;
-  padding:11px;
-  border-radius:10px;
-  border:1px solid #363c45;
-  background:#20242a;
-  color:#fff
+.small{
+  color:#6cb6ff;
 }
 
-.row{
-  display:flex;
-  justify-content:space-between;
-  font-size:13px;
-  margin-top:9px
+.good{
+  color:#55d68a;
+}
+
+.bad{
+  color:#ff6666;
+}
+
+.muted{
+  color:#9aa3ad;
 }
 
 .bar{
-  height:8px;
-  background:#30353d;
-  border-radius:8px;
-  margin-top:4px;
-  overflow:hidden
+  height:9px;
+  background:#303640;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:7px;
 }
 
 .fill{
   height:100%;
-  background:#8c96a3
+  background:#8795a8;
+}
+
+.freq-row{
+  margin:12px 0;
+}
+
+.freq-top{
+  display:flex;
+  justify-content:space-between;
+}
+
+.prediction{
+  text-align:center;
+  padding:20px;
+}
+
+.pred-main{
+  font-size:30px;
+  font-weight:900;
+  margin:8px 0;
+}
+
+.small-text{
+  color:#9aa3ad;
+  font-size:13px;
 }
 
 .history{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-top:10px
+  line-height:2;
+  word-break:break-word;
 }
 
 .pill{
-  width:35px;
-  height:35px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  border:1px solid #3a4048;
-  font-weight:800
-}
-
-.note{
-  font-size:13px;
-  color:#aeb5bd;
-  line-height:1.5
-}
-
-.good{
-  color:#4bd184
-}
-
-.bad{
-  color:#ff6868
-}
-
-.violet{
-  color:#c084ff
-}
-
-.resultBox{
-  text-align:center;
-  padding:18px 10px
-}
-
-.resultTitle{
-  font-size:12px;
-  color:#9aa3ad;
-  margin-bottom:7px
-}
-
-.resultMain{
-  font-size:30px;
-  font-weight:900
-}
-
-.greenText{color:#16d878}
-.redText{color:#ff4d5d}
-.violetText{color:#c084ff}
-.bigText{color:#ffad32}
-.smallText{color:#4aa3ff}
-
-.numberList{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin-top:8px
-}
-
-.numberBadge{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:#252a31;
-  border:2px solid #555;
-  font-size:21px;
-  font-weight:900
-}
-
-.badge{
   display:inline-block;
-  padding:5px 9px;
-  border-radius:8px;
-  background:#252a31;
-  margin:3px;
-  font-size:12px
+  padding:3px 9px;
+  border-radius:20px;
+  background:#252a33;
+  margin:2px;
 }
 
-.predictionGrid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px
+.warning{
+  color:#ffb84d;
 }
 
-.predictionCard{
-  background:#20242a;
-  border:1px solid #343a42;
-  border-radius:12px;
-  padding:12px;
-  text-align:center
-}
-
-.predictionCard .smallLabel{
-  font-size:10px;
-  color:#9aa3ad
-}
-
-.predictionCard .bigValue{
-  font-size:20px;
-  font-weight:900;
-  margin-top:4px
-}
-
-.hide{
-  display:none
-}
-
-@media(min-width:650px){
-  .grid{
-    grid-template-columns:repeat(4,1fr)
+@media(max-width:600px){
+  .analysis{
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -262,1601 +183,664 @@ body{
 
 <div class="wrap">
 
-  <div class="title">Number Probability Analyzer</div>
+<h1>Number Probability Analyzer V3</h1>
+<div class="sub">
+Statistical analysis • Last 100 + Last 200 • Big/Small • Maximum 2 numbers
+</div>
 
-  <div class="sub">
-    Statistical analysis • Last 100 results • Big/Small • Color • Number
+<!-- DASHBOARD -->
+<div class="grid">
+
+  <div class="stat">
+    <div class="label">Total Data</div>
+    <div class="value" id="total">0</div>
   </div>
 
-  <div class="tabs">
-    <button class="tab active" data-tab="dash">Dashboard</button>
-    <button class="tab" data-tab="patterns">Patterns</button>
-    <button class="tab" data-tab="streaks">Streaks</button>
-    <button class="tab" data-tab="history">History</button>
+  <div class="stat">
+    <div class="label">Small</div>
+    <div class="value small" id="smallCount">—</div>
   </div>
 
-
-  <!-- DASHBOARD -->
-
-  <section id="dash">
-
-    <div class="grid">
-
-      <div class="card">
-        <div class="label">TOTAL DATA</div>
-        <div id="total" class="value">0</div>
-      </div>
-
-      <div class="card">
-        <div class="label">SMALL</div>
-        <div id="small" class="value">—</div>
-      </div>
-
-      <div class="card">
-        <div class="label">BIG</div>
-        <div id="big" class="value">—</div>
-      </div>
-
-      <div class="card">
-        <div class="label">LATEST</div>
-        <div id="latest" class="value">—</div>
-      </div>
-
-    </div>
-
-
-    <!-- ENTER -->
-
-    <div class="card">
-
-      <b>ENTER RESULT</b>
-
-      <div class="buttons" id="buttons"></div>
-
-      <div class="actions">
-        <button class="action" id="undo">Undo</button>
-        <button class="action" id="clear">Clear All</button>
-      </div>
-
-    </div>
-
-
-    <!-- FINAL PREDICTION -->
-
-    <div class="card">
-
-      <b>NEXT RESULT ANALYSIS</b>
-
-      <div class="predictionGrid">
-
-        <div class="predictionCard">
-
-          <div class="smallLabel">BIG / SMALL</div>
-
-          <div id="finalSize"
-               class="bigValue">
-            —
-          </div>
-
-        </div>
-
-
-        <div class="predictionCard">
-
-          <div class="smallLabel">COLOR</div>
-
-          <div id="finalColor"
-               class="bigValue">
-            —
-          </div>
-
-        </div>
-
-
-        <div class="predictionCard">
-
-          <div class="smallLabel">NUMBER</div>
-
-          <div id="finalNumber"
-               class="bigValue">
-            —
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- NUMBER -->
-
-    <div class="card resultBox">
-
-      <div class="resultTitle">
-        MOST LIKELY NUMBER
-      </div>
-
-      <div id="numberPrediction"
-           class="numberList">
-        —
-      </div>
-
-      <div class="note">
-        Maximum 2 numbers only
-      </div>
-
-    </div>
-
-
-    <!-- SIZE -->
-
-    <div class="card resultBox">
-
-      <div class="resultTitle">
-        MOST LIKELY BIG / SMALL
-      </div>
-
-      <div id="sizePrediction"
-           class="resultMain">
-        —
-      </div>
-
-    </div>
-
-
-    <!-- COLOR -->
-
-    <div class="card resultBox">
-
-      <div class="resultTitle">
-        MOST LIKELY COLOR
-      </div>
-
-      <div id="colorPrediction"
-           class="resultMain">
-        —
-      </div>
-
-    </div>
-
-
-    <!-- LAST 100 -->
-
-    <div class="card">
-
-      <b>LAST 100 ANALYSIS</b>
-
-      <div id="last100Summary"
-           class="note">
-        Need data.
-      </div>
-
-    </div>
-
-
-    <!-- FREQUENCY -->
-
-    <div class="card">
-
-      <b>NUMBER FREQUENCY — LAST 100</b>
-
-      <div id="freq"></div>
-
-    </div>
-
-
-    <!-- PREDICTION TRACKING -->
-
-    <div class="card">
-
-      <b>WIN / LOSS TRACKING</b>
-
-      <div id="prediction"
-           class="note">
-        Need more data.
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- PATTERNS -->
-
-  <section id="patterns" class="hide">
-
-    <div class="card">
-
-      <b>CURRENT NUMBER → NEXT</b>
-
-      <div id="transition"
-           class="note">
-        Need at least 2 results.
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <b>BIG / SMALL TRANSITIONS</b>
-
-      <div id="bsTrans"
-           class="note">
-        Need more data.
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <b>COLOR TRANSITIONS</b>
-
-      <div id="colorTrans"
-           class="note">
-        Need more data.
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <b>RECENT vs LAST 100</b>
-
-      <div id="recent"
-           class="note">
-        Need more data.
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <b>COMBINED PATTERN</b>
-
-      <div id="combined"
-           class="note">
-        Need more data.
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- STREAKS -->
-
-  <section id="streaks" class="hide">
-
-    <div class="card">
-
-      <b>CURRENT STREAKS</b>
-
-      <div id="currentStreaks"
-           class="note">
-        No data.
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <b>WIN / LOSS STREAK</b>
-
-      <div id="winloss"
-           class="note">
-        No prediction results.
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <b>MAXIMUM STREAK — LAST 100</b>
-
-      <div id="longest"
-           class="note">
-        No data.
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <b>STREAK WARNING</b>
-
-      <div id="warning"
-           class="note">
-        No data.
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- HISTORY -->
-
-  <section id="history" class="hide">
-
-    <div class="card">
-
-      <b>LAST 100 RESULTS</b>
-
-      <div id="historyList"
-           class="history">
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <b>FULL SEQUENCE</b>
-
-      <div id="fullHistory"
-           class="note">
-        No results.
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <div class="card">
-
-    <b>IMPORTANT</b>
-
-    <div class="note">
-      This system provides statistical estimates from entered historical
-      results. It cannot guarantee the next result. Random outcomes can
-      break any observed pattern or streak.
-    </div>
-
+  <div class="stat">
+    <div class="label">Big</div>
+    <div class="value big" id="bigCount">—</div>
+  </div>
+
+  <div class="stat">
+    <div class="label">Latest</div>
+    <div class="value" id="latest">—</div>
   </div>
 
 </div>
 
+<!-- ENTER RESULT -->
+<div class="card">
+
+<h2>ENTER RESULT</h2>
+
+<div class="numbers">
+
+<button onclick="addResult(0)">0</button>
+<button onclick="addResult(1)">1</button>
+<button onclick="addResult(2)">2</button>
+<button onclick="addResult(3)">3</button>
+<button onclick="addResult(4)">4</button>
+
+<button onclick="addResult(5)">5</button>
+<button onclick="addResult(6)">6</button>
+<button onclick="addResult(7)">7</button>
+<button onclick="addResult(8)">8</button>
+<button onclick="addResult(9)">9</button>
+
+</div>
+
+<div class="grid" style="margin-top:10px">
+
+<button onclick="undo()">Undo</button>
+<button onclick="clearAll()">Clear All</button>
+
+</div>
+
+</div>
+
+<!-- PREDICTION -->
+<div class="card prediction">
+
+<h2>NEXT RESULT ANALYSIS</h2>
+
+<div class="analysis">
+
+<div class="stat">
+<div class="label">Big / Small</div>
+<div class="pred-main" id="predBS">—</div>
+</div>
+
+<div class="stat">
+<div class="label">Number</div>
+<div class="pred-main" id="predNum">—</div>
+</div>
+
+<div class="stat">
+<div class="label">Confidence</div>
+<div class="pred-main" id="confidence">—</div>
+</div>
+
+</div>
+
+<div class="small-text">
+Maximum 2 numbers only
+</div>
+
+</div>
+
+<!-- STREAK -->
+<div class="card">
+
+<h2>STREAK TRACKING</h2>
+
+<div class="analysis">
+
+<div class="stat">
+<div class="label">Current Streak</div>
+<div class="value" id="currentStreak">—</div>
+</div>
+
+<div class="stat">
+<div class="label">Max Win Streak - Last 100</div>
+<div class="value good" id="maxWin">—</div>
+</div>
+
+<div class="stat">
+<div class="label">Max Loss Streak - Last 100</div>
+<div class="value bad" id="maxLoss">—</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- LAST 100 / 200 -->
+<div class="card">
+
+<h2>DATA ANALYSIS</h2>
+
+<div class="analysis">
+
+<div class="stat">
+<div class="label">Last 100</div>
+<div class="value" id="last100">0</div>
+</div>
+
+<div class="stat">
+<div class="label">Last 200</div>
+<div class="value" id="last200">0</div>
+</div>
+
+<div class="stat">
+<div class="label">Small / Big - Last 100</div>
+<div class="value" id="ratio100">—</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- FREQUENCY -->
+<div class="card">
+
+<h2>NUMBER FREQUENCY — LAST 200</h2>
+
+<div id="frequency"></div>
+
+</div>
+
+<!-- RECENT HISTORY -->
+<div class="card">
+
+<h2>RECENT RESULTS</h2>
+
+<div id="history" class="history">
+No results yet.
+</div>
+
+</div>
+
+<!-- INFO -->
+<div class="card">
+
+<h2>HOW IT WORKS</h2>
+
+<p>
+<b>Small:</b> 0–4
+</p>
+
+<p>
+<b>Big:</b> 5–9
+</p>
+
+<p>
+The analyzer uses both the <b>last 100</b> and <b>last 200</b> results.
+Recent results receive more weight.
+</p>
+
+<p class="warning">
+⚠️ This is a statistical analyzer only. Random outcomes can break observed patterns.
+It cannot guarantee the next result.
+</p>
+
+</div>
+
+</div>
 
 <script>
 
-(() => {
+let data = JSON.parse(localStorage.getItem("numberAnalyzerV3") || "[]");
 
-let data = [];
-let predictionRecords = [];
-
-const $ = id => document.getElementById(id);
-
-const isSmall = n => n <= 4;
-
-const category = n =>
-  isSmall(n) ? "Small" : "Big";
-
-
-/*
-COLOR RULE
-
-0 = Violet + Red
-5 = Violet
-Even = Red
-Odd = Green
-
-For final prediction, 0 is treated as Violet.
-*/
-
-function getColor(n){
-
-  if(n === 0) return "Violet";
-  if(n === 5) return "Violet";
-
-  return n % 2 === 0
-    ? "Red"
-    : "Green";
+function save(){
+  localStorage.setItem("numberAnalyzerV3",JSON.stringify(data));
 }
 
-
-function pct(a,b){
-
-  return b
-    ? Math.round((a/b)*100)
-    : 0;
-
+function addResult(n){
+  data.push(Number(n));
+  save();
+  render();
 }
 
-
-/*
-ONLY LAST 100 DATA
-*/
-
-function last100(){
-
-  return data.slice(-100);
-
+function undo(){
+  if(data.length){
+    data.pop();
+    save();
+    render();
+  }
 }
 
+function clearAll(){
+  if(confirm("Delete all results?")){
+    data=[];
+    save();
+    render();
+  }
+}
 
-/*
-STREAK
-*/
+function isBig(n){
+  return n>=5;
+}
 
-function streak(arr,fn){
+function getBS(n){
+  return isBig(n) ? "BIG" : "SMALL";
+}
 
-  if(!arr.length)
-    return {value:null,len:0};
+/* --------------------------------
+   CURRENT STREAK
+-------------------------------- */
 
-  const v = fn(arr[arr.length-1]);
+function getCurrentStreak(arr){
 
-  let len = 1;
+  if(arr.length<2)
+    return {
+      type:"—",
+      count:0
+    };
 
-  for(
-    let i=arr.length-2;
-    i>=0;
-    i--
-  ){
+  let last=getBS(arr[arr.length-1]);
+  let count=1;
 
-    if(fn(arr[i]) !== v)
+  for(let i=arr.length-2;i>=0;i--){
+
+    if(getBS(arr[i])===last)
+      count++;
+    else
       break;
-
-    len++;
-
   }
 
   return {
-    value:v,
-    len:len
+    type:last,
+    count:count
   };
-
 }
 
+/* --------------------------------
+   MAX WIN / LOSS STREAK
+   Prediction comparison
+-------------------------------- */
 
-/*
-LONGEST STREAK
-*/
+function calculatePredictionStats(arr){
 
-function longest(arr,fn){
-
-  if(!arr.length)
+  if(arr.length<2)
     return {
-      value:null,
-      len:0
+      maxWin:0,
+      maxLoss:0
     };
 
-  let best = {
-    value:null,
-    len:0
-  };
+  let wins=0;
+  let losses=0;
 
-  let current = null;
-  let len = 0;
+  let maxWin=0;
+  let maxLoss=0;
 
-  arr.forEach(x => {
+  /*
+    A prediction is considered correct when
+    previous prediction's Big/Small equals
+    the actual next Big/Small.
+  */
 
-    const v = fn(x);
+  for(let i=1;i<arr.length;i++){
 
-    if(v === current){
+    let previous=arr[i-1];
 
-      len++;
+    let prediction=getBS(previous);
+
+    let actual=getBS(arr[i]);
+
+    if(prediction===actual){
+
+      wins++;
+      losses=0;
+
+      if(wins>maxWin)
+        maxWin=wins;
 
     }else{
 
-      current = v;
-      len = 1;
+      losses++;
+      wins=0;
 
+      if(losses>maxLoss)
+        maxLoss=losses;
     }
+  }
 
-    if(len > best.len){
+  return {
+    maxWin,
+    maxLoss
+  };
+}
 
-      best = {
-        value:v,
-        len:len
-      };
+/* --------------------------------
+   BIG / SMALL PROBABILITY
+-------------------------------- */
 
-    }
+function calculateBS(arr){
+
+  if(!arr.length)
+    return {
+      small:0,
+      big:0
+    };
+
+  let small=0;
+  let big=0;
+
+  /*
+    Recent 100 gets stronger weight.
+  */
+
+  arr.forEach((n,i)=>{
+
+    let age=arr.length-i;
+
+    let weight=age<=100 ? 2 : 1;
+
+    if(isBig(n))
+      big+=weight;
+    else
+      small+=weight;
 
   });
 
-  return best;
+  let total=small+big;
 
+  return {
+    small:small/total*100,
+    big:big/total*100
+  };
 }
 
+/* --------------------------------
+   NUMBER PROBABILITY
+-------------------------------- */
 
-/*
-CURRENT NUMBER → NEXT NUMBER
-*/
+function calculateNumbers(arr){
 
-function numberTransition(){
+  let score=Array(10).fill(0);
 
-  const arr = last100();
+  arr.forEach((n,i)=>{
 
-  if(arr.length < 2)
+    let age=arr.length-i;
+
+    let weight;
+
+    if(age<=50)
+      weight=4;
+    else if(age<=100)
+      weight=3;
+    else
+      weight=1;
+
+    score[n]+=weight;
+  });
+
+  let total=score.reduce((a,b)=>a+b,0);
+
+  return score.map((s,n)=>({
+    number:n,
+    score:s,
+    probability:total ? s/total*100 : 0
+  })).sort((a,b)=>b.score-a.score);
+}
+
+/* --------------------------------
+   TRANSITION ANALYSIS
+-------------------------------- */
+
+function transitionAnalysis(arr){
+
+  if(arr.length<2)
     return null;
 
-  const last = arr[arr.length-1];
+  let last=arr[arr.length-1];
 
-  const counts =
-    Array(10).fill(0);
+  let small=0;
+  let big=0;
 
-  for(
-    let i=0;
-    i<arr.length-1;
-    i++
-  ){
+  let total=0;
 
-    if(arr[i] === last){
+  /*
+    Check what usually comes after the same
+    previous number.
+  */
 
-      counts[arr[i+1]]++;
+  for(let i=0;i<arr.length-1;i++){
 
+    if(arr[i]===last){
+
+      total++;
+
+      if(isBig(arr[i+1]))
+        big++;
+      else
+        small++;
     }
-
   }
-
-  const total =
-    counts.reduce(
-      (a,b)=>a+b,
-      0
-    );
 
   if(!total)
     return null;
 
   return {
-    last:last,
-    counts:counts,
-    total:total
+    small:small/total*100,
+    big:big/total*100,
+    total
   };
-
 }
 
-
-/*
-NUMBER PREDICTION
-
-IMPORTANT:
-MAXIMUM 2 NUMBERS ONLY
-*/
-
-function predictNumbers(){
-
-  const p = numberTransition();
-
-  if(!p)
-    return [];
-
-  const list = [];
-
-  p.counts.forEach(
-    (count,num) => {
-
-      if(count > 0){
-
-        list.push({
-          num:num,
-          count:count
-        });
-
-      }
-
-    }
-  );
-
-  list.sort(
-    (a,b)=>b.count-a.count
-  );
-
-  return list
-    .slice(0,2)
-    .map(x=>x.num);
-
-}
-
-
-/*
-SIZE PREDICTION
-ONLY ONE RESULT
-*/
-
-function predictSize(){
-
-  const arr = last100();
-
-  if(!arr.length)
-    return null;
-
-  let small = 0;
-  let big = 0;
-
-  arr.forEach(n => {
-
-    if(isSmall(n))
-      small++;
-    else
-      big++;
-
-  });
-
-  return small >= big
-    ? "Small"
-    : "Big";
-
-}
-
-
-/*
-COLOR PREDICTION
-ONLY ONE RESULT
-*/
-
-function predictColor(){
-
-  const arr = last100();
-
-  if(!arr.length)
-    return null;
-
-  const c = {
-    Red:0,
-    Green:0,
-    Violet:0
-  };
-
-  arr.forEach(n => {
-
-    c[getColor(n)]++;
-
-  });
-
-  return Object.keys(c)
-    .sort((a,b)=>c[b]-c[a])[0];
-
-}
-
-
-/*
-PREDICTION SNAPSHOT
-
-Uses current last-100 data.
-*/
-
-function createPrediction(){
-
-  const nums =
-    predictNumbers();
-
-  const size =
-    predictSize();
-
-  const color =
-    predictColor();
-
-  if(!size || !color)
-    return null;
-
-  return {
-
-    size:size,
-    color:color,
-    numbers:nums
-
-  };
-
-}
-
-
-/*
-BUTTONS
-*/
-
-for(let n=0;n<=9;n++){
-
-  const b =
-    document.createElement("button");
-
-  b.className = "btn";
-
-  b.type = "button";
-
-  b.textContent = n;
-
-  b.onclick =
-    () => addResult(n);
-
-  $("buttons").appendChild(b);
-
-}
-
-
-/*
-UNDO
-*/
-
-$("undo").onclick = () => {
-
-  if(data.length){
-
-    data.pop();
-
-    predictionRecords.pop();
-
-    render();
-
-  }
-
-};
-
-
-/*
-CLEAR
-*/
-
-$("clear").onclick = () => {
-
-  if(confirm("Clear all entered results?")){
-
-    data = [];
-
-    predictionRecords = [];
-
-    render();
-
-  }
-
-};
-
-
-/*
-ADD RESULT
-*/
-
-function addResult(n){
-
-  /*
-  Prediction made BEFORE
-  entering the new actual result.
-  */
-
-  if(data.length >= 2){
-
-    const prediction =
-      createPrediction();
-
-    if(prediction){
-
-      const actualSize =
-        category(n);
-
-      const actualColor =
-        getColor(n);
-
-      const numberWin =
-        prediction.numbers.includes(n);
-
-      const sizeWin =
-        prediction.size === actualSize;
-
-      const colorWin =
-        prediction.color === actualColor;
-
-      /*
-      Combined prediction is counted
-      as WIN only when all available
-      prediction components match.
-      */
-
-      const combinedWin =
-        sizeWin &&
-        colorWin &&
-        numberWin;
-
-      predictionRecords.push({
-
-        prediction:prediction,
-
-        actual:n,
-
-        sizeWin:sizeWin,
-
-        colorWin:colorWin,
-
-        numberWin:numberWin,
-
-        win:combinedWin
-
-      });
-
-    }
-
-  }
-
-  data.push(n);
-
-  render();
-
-}
-
-
-/*
-TABS
-*/
-
-document
-.querySelectorAll(".tab")
-.forEach(btn => {
-
-  btn.addEventListener(
-    "click",
-    () => {
-
-      document
-      .querySelectorAll(".tab")
-      .forEach(x =>
-        x.classList.remove("active")
-      );
-
-      btn.classList.add("active");
-
-      [
-        "dash",
-        "patterns",
-        "streaks",
-        "history"
-      ].forEach(id => {
-
-        $(id).classList.toggle(
-          "hide",
-          id !== btn.dataset.tab
-        );
-
-      });
-
-    }
-  );
-
-});
-
-
-/*
-MAIN RENDER
-*/
+/* --------------------------------
+   RENDER
+-------------------------------- */
 
 function render(){
 
-  const arr =
-    last100();
+  document.getElementById("total").textContent=data.length;
 
-  const N =
-    data.length;
+  document.getElementById("latest").textContent=
+    data.length ? data[data.length-1] : "—";
 
-  const small =
-    arr.filter(isSmall).length;
+  let last100=data.slice(-100);
+  let last200=data.slice(-200);
 
-  const big =
-    arr.length-small;
+  document.getElementById("last100").textContent=last100.length;
+  document.getElementById("last200").textContent=last200.length;
 
+  let small100=last100.filter(n=>!isBig(n)).length;
+  let big100=last100.filter(n=>isBig(n)).length;
 
-  $("total").textContent = N;
+  document.getElementById("smallCount").textContent=
+    last100.length ? small100 : "—";
 
-  $("small").textContent =
-    arr.length
-      ? pct(small,arr.length)+"%"
-      : "—";
+  document.getElementById("bigCount").textContent=
+    last100.length ? big100 : "—";
 
-  $("big").textContent =
-    arr.length
-      ? pct(big,arr.length)+"%"
-      : "—";
+  document.getElementById("ratio100").textContent=
+    last100.length ?
+    Math.round(small100/last100.length*100)+"% / "+
+    Math.round(big100/last100.length*100)+"%"
+    : "—";
 
-  $("latest").textContent =
-    N
-      ? data[N-1]
-      : "—";
+  renderPrediction(last100,last200);
 
+  renderStreak(last100);
 
-  /*
-  FINAL SIZE
-  */
+  renderFrequency(last200);
 
-  const size =
-    predictSize();
+  renderHistory();
+}
 
-  if(size){
+/* --------------------------------
+   PREDICTION
+-------------------------------- */
 
-    $("finalSize").textContent =
-      size;
+function renderPrediction(last100,last200){
 
-    $("finalSize").className =
-      "bigValue "+
-      (size==="Big"
-        ? "bigText"
-        : "smallText");
+  if(!last100.length){
 
-    $("sizePrediction").textContent =
-      size;
+    document.getElementById("predBS").textContent="—";
+    document.getElementById("predNum").textContent="—";
+    document.getElementById("confidence").textContent="—";
 
-    $("sizePrediction").className =
-      "resultMain "+
-      (size==="Big"
-        ? "bigText"
-        : "smallText");
-
-  }else{
-
-    $("finalSize").textContent="—";
-
-    $("sizePrediction").textContent="—";
-
+    return;
   }
 
+  let bs100=calculateBS(last100);
+  let bs200=calculateBS(last200);
+
+  let transition=transitionAnalysis(last200);
+
+  let smallScore=
+    bs100.small*0.60+
+    bs200.small*0.40;
+
+  let bigScore=
+    bs100.big*0.60+
+    bs200.big*0.40;
 
   /*
-  FINAL COLOR
+    If transition data exists,
+    add a small amount of weight.
   */
 
-  const color =
-    predictColor();
+  if(transition){
 
-  if(color){
+    smallScore=
+      smallScore*0.80+
+      transition.small*0.20;
 
-    $("finalColor").textContent =
-      color;
-
-    $("finalColor").className =
-      "bigValue "+
-      (
-        color==="Green"
-          ? "greenText"
-          : color==="Red"
-            ? "redText"
-            : "violetText"
-      );
-
-    $("colorPrediction").textContent =
-      color;
-
-    $("colorPrediction").className =
-      "resultMain "+
-      (
-        color==="Green"
-          ? "greenText"
-          : color==="Red"
-            ? "redText"
-            : "violetText"
-      );
-
-  }else{
-
-    $("finalColor").textContent="—";
-
-    $("colorPrediction").textContent="—";
-
+    bigScore=
+      bigScore*0.80+
+      transition.big*0.20;
   }
 
+  let prediction=
+    bigScore>smallScore ? "BIG" : "SMALL";
 
-  /*
-  FINAL NUMBER
-  */
-
-  const nums =
-    predictNumbers();
-
-  if(nums.length){
-
-    $("finalNumber").textContent =
-      nums.join(" / ");
-
-    $("numberPrediction").innerHTML =
-      nums.map(n =>
-        `<span class="numberBadge">${n}</span>`
-      ).join("");
-
-  }else{
-
-    $("finalNumber").textContent="—";
-
-    $("numberPrediction").textContent="—";
-
-  }
-
-
-  /*
-  LAST 100 SUMMARY
-  */
-
-  if(arr.length){
-
-    const colorCounts = {
-      Red:0,
-      Green:0,
-      Violet:0
-    };
-
-    arr.forEach(n =>
-      colorCounts[getColor(n)]++
+  let confidence=
+    Math.round(
+      Math.max(bigScore,smallScore)
     );
 
-    const topColor =
-      Object.keys(colorCounts)
-      .sort(
-        (a,b)=>
-          colorCounts[b]-
-          colorCounts[a]
-      )[0];
+  document.getElementById("predBS").textContent=prediction;
 
-    $("last100Summary").innerHTML =
-      `Analysed: <b>${arr.length}</b> results<br>
-       Small: <b>${pct(small,arr.length)}%</b> •
-       Big: <b>${pct(big,arr.length)}%</b><br>
-       Top Color: <b>${topColor}</b><br>
-       Only the latest 100 results are used for prediction.`;
+  document.getElementById("predBS").className=
+    "pred-main "+(prediction==="BIG"?"big":"small");
 
-  }else{
+  /* Number prediction */
 
-    $("last100Summary").textContent =
-      "Need data.";
+  let numbers=calculateNumbers(last200);
 
+  let top=numbers.slice(0,2);
+
+  document.getElementById("predNum").textContent=
+    top.map(x=>x.number).join(" / ");
+
+  document.getElementById("confidence").textContent=
+    Math.min(confidence,99)+"%";
+}
+
+/* --------------------------------
+   STREAK
+-------------------------------- */
+
+function renderStreak(last100){
+
+  if(!last100.length){
+
+    document.getElementById("currentStreak").textContent="—";
+    document.getElementById("maxWin").textContent="—";
+    document.getElementById("maxLoss").textContent="—";
+
+    return;
   }
 
+  let current=getCurrentStreak(last100);
 
-  /*
-  FREQUENCY
-  */
+  document.getElementById("currentStreak").textContent=
+    current.type+" × "+current.count;
 
-  const counts =
-    Array(10).fill(0);
+  let stats=calculatePredictionStats(last100);
 
-  arr.forEach(n =>
-    counts[n]++
-  );
+  document.getElementById("maxWin").textContent=
+    stats.maxWin;
 
-  $("freq").innerHTML =
-    counts.map((v,n) =>
+  document.getElementById("maxLoss").textContent=
+    stats.maxLoss;
+}
 
-      `<div class="row">
+/* --------------------------------
+   FREQUENCY
+-------------------------------- */
+
+function renderFrequency(arr){
+
+  let box=document.getElementById("frequency");
+
+  if(!arr.length){
+
+    box.innerHTML="<div class='muted'>No data yet.</div>";
+    return;
+  }
+
+  let count=Array(10).fill(0);
+
+  arr.forEach(n=>count[n]++);
+
+  let max=Math.max(...count);
+
+  box.innerHTML="";
+
+  count.forEach((c,n)=>{
+
+    let percent=c/arr.length*100;
+
+    let row=document.createElement("div");
+
+    row.className="freq-row";
+
+    row.innerHTML=`
+
+      <div class="freq-top">
         <span>
-          ${n} • ${category(n)} • ${getColor(n)}
+          <b>${n}</b>
+          • ${getBS(n)}
         </span>
-        <b>
-          ${v} (${pct(v,arr.length)}%)
-        </b>
+
+        <span>
+          ${c} (${percent.toFixed(1)}%)
+        </span>
       </div>
 
       <div class="bar">
         <div
           class="fill"
-          style="width:${pct(v,arr.length)}%">
+          style="width:${max ? c/max*100 : 0}%">
         </div>
-      </div>`
+      </div>
+    `;
 
-    ).join("");
-
-
-  /*
-  PREDICTION TRACKING
-  */
-
-  renderPredictionTracking();
-
-  renderPatterns();
-
-  renderStreaks();
-
-  renderHistory();
-
+    box.appendChild(row);
+  });
 }
 
-
-/*
-PREDICTION TRACKING
-*/
-
-function renderPredictionTracking(){
-
-  const total =
-    predictionRecords.length;
-
-  if(!total){
-
-    $("prediction").textContent =
-      "Prediction tracking will start after enough data.";
-
-    return;
-
-  }
-
-  const sizeWins =
-    predictionRecords
-    .filter(x=>x.sizeWin)
-    .length;
-
-  const colorWins =
-    predictionRecords
-    .filter(x=>x.colorWin)
-    .length;
-
-  const numberWins =
-    predictionRecords
-    .filter(x=>x.numberWin)
-    .length;
-
-  const wins =
-    predictionRecords
-    .filter(x=>x.win)
-    .length;
-
-
-  /*
-  CURRENT COMBINED WIN/LOSS STREAK
-  */
-
-  let currentType =
-    predictionRecords[total-1].win
-      ? "WIN"
-      : "LOSS";
-
-  let currentStreak = 0;
-
-  for(
-    let i=total-1;
-    i>=0;
-    i--
-  ){
-
-    const type =
-      predictionRecords[i].win
-        ? "WIN"
-        : "LOSS";
-
-    if(type !== currentType)
-      break;
-
-    currentStreak++;
-
-  }
-
-
-  $("prediction").innerHTML =
-
-    `Combined Accuracy:
-      <b>${pct(wins,total)}%</b>
-      (${wins}/${total})<br>
-
-     Big/Small Accuracy:
-      <b>${pct(sizeWins,total)}%</b><br>
-
-     Color Accuracy:
-      <b>${pct(colorWins,total)}%</b><br>
-
-     Number Accuracy:
-      <b>${pct(numberWins,total)}%</b><br><br>
-
-     Current:
-      ${
-        currentType==="WIN"
-          ? `<span class="good">
-               WIN × ${currentStreak}
-             </span>`
-          : `<span class="bad">
-               LOSS × ${currentStreak}
-             </span>`
-      }`;
-
-}
-
-
-/*
-PATTERNS
-*/
-
-function renderPatterns(){
-
-  const arr =
-    last100();
-
-  if(arr.length < 2){
-
-    $("transition").textContent =
-      "Need at least 2 results.";
-
-    return;
-
-  }
-
-
-  /*
-  NUMBER TRANSITION
-  */
-
-  const p =
-    numberTransition();
-
-  if(p){
-
-    const entries =
-      p.counts
-      .map((v,i)=>
-        v
-          ? `${i}=${v}× (${pct(v,p.total)}%)`
-          : null
-      )
-      .filter(Boolean);
-
-    $("transition").textContent =
-      entries.length
-        ? `After ${p.last}: ${entries.join(" • ")}`
-        : `No previous transition for ${p.last}.`;
-
-  }
-
-
-  /*
-  BIG / SMALL TRANSITIONS
-  */
-
-  const bt = {
-    BB:0,
-    BS:0,
-    SB:0,
-    SS:0
-  };
-
-  const ct = {};
-
-
-  for(
-    let i=0;
-    i<arr.length-1;
-    i++
-  ){
-
-    const a =
-      isSmall(arr[i])
-        ? "S"
-        : "B";
-
-    const b =
-      isSmall(arr[i+1])
-        ? "S"
-        : "B";
-
-    bt[a+b]++;
-
-
-    const key =
-      getColor(arr[i])+
-      " → "+
-      getColor(arr[i+1]);
-
-    ct[key] =
-      (ct[key]||0)+1;
-
-  }
-
-
-  $("bsTrans").innerHTML =
-    Object.entries(bt)
-    .map(
-      ([k,v])=>
-        `<span class="badge">
-          ${k}: ${v}
-        </span>`
-    )
-    .join("");
-
-
-  $("colorTrans").innerHTML =
-    Object.entries(ct)
-    .sort((a,b)=>b[1]-a[1])
-    .slice(0,6)
-    .map(
-      ([k,v])=>
-        `<span class="badge">
-          ${k}: ${v}
-        </span>`
-    )
-    .join("");
-
-
-  /*
-  RECENT VS LAST 100
-  */
-
-  const recent =
-    arr.slice(-20);
-
-  const recentSmall =
-    recent.filter(isSmall).length;
-
-  const overallSmall =
-    arr.filter(isSmall).length;
-
-  $("recent").textContent =
-    `Last ${recent.length}: Small ${
-      pct(recentSmall,recent.length)
-    }%, Big ${
-      pct(recent.length-recentSmall,recent.length)
-    }%. Last 100: Small ${
-      pct(overallSmall,arr.length)
-    }%, Big ${
-      pct(arr.length-overallSmall,arr.length)
-    }%.`;
-
-
-  /*
-  COMBINED
-  */
-
-  const last =
-    arr[arr.length-1];
-
-  $("combined").innerHTML =
-    `Latest:
-      <b>${last}</b>
-      =
-      ${category(last)}
-      +
-      ${getColor(last)}
-      <br><br>
-      Final prediction:
-      <b>${predictSize() || "—"}</b>
-      +
-      <b>${predictColor() || "—"}</b>
-      +
-      <b>${predictNumbers().join(", ") || "—"}</b>`;
-
-}
-
-
-/*
-STREAKS
-*/
-
-function renderStreaks(){
-
-  const arr =
-    last100();
-
-  if(!arr.length){
-
-    $("currentStreaks").textContent =
-      "No data.";
-
-    $("winloss").textContent =
-      "No prediction results.";
-
-    $("longest").textContent =
-      "No data.";
-
-    $("warning").textContent =
-      "No data.";
-
-    return;
-
-  }
-
-
-  const ns =
-    streak(arr,x=>x);
-
-  const ss =
-    streak(arr,category);
-
-  const cs =
-    streak(arr,getColor);
-
-
-  $("currentStreaks").innerHTML =
-
-    `<b>Number:</b>
-      ${ns.value} × ${ns.len}<br>
-
-     <b>Big/Small:</b>
-      ${ss.value} × ${ss.len}<br>
-
-     <b>Color:</b>
-      ${cs.value} × ${cs.len}`;
-
-
-  /*
-  LONGEST LAST 100
-  */
-
-  const ln =
-    longest(arr,x=>x);
-
-  const ls =
-    longest(arr,category);
-
-  const lc =
-    longest(arr,getColor);
-
-
-  $("longest").innerHTML =
-
-    `Same Number:
-      <b>${ln.value} × ${ln.len}</b><br>
-
-     Big/Small:
-      <b>${ls.value} × ${ls.len}</b><br>
-
-     Color:
-      <b>${lc.value} × ${lc.len}</b>`;
-
-
-  /*
-  WIN/LOSS MAXIMUM STREAK
-  */
-
-  if(predictionRecords.length){
-
-    const records =
-      predictionRecords.slice(-100);
-
-    let maxWin = 0;
-    let maxLoss = 0;
-
-    let currentWin = 0;
-    let currentLoss = 0;
-
-
-    records.forEach(r => {
-
-      if(r.win){
-
-        currentWin++;
-        currentLoss=0;
-
-        maxWin =
-          Math.max(
-            maxWin,
-            currentWin
-          );
-
-      }else{
-
-        currentLoss++;
-        currentWin=0;
-
-        maxLoss =
-          Math.max(
-            maxLoss,
-            currentLoss
-          );
-
-      }
-
-    });
-
-
-    const last =
-      records[records.length-1];
-
-    let current = 0;
-
-    if(last.win){
-
-      for(
-        let i=records.length-1;
-        i>=0 && records[i].win;
-        i--
-      )
-        current++;
-
-    }else{
-
-      for(
-        let i=records.length-1;
-        i>=0 && !records[i].win;
-        i--
-      )
-        current++;
-
-    }
-
-
-    $("winloss").innerHTML =
-
-      `Current:
-        ${
-          last.win
-            ? `<span class="good">
-                WIN × ${current}
-               </span>`
-            : `<span class="bad">
-                LOSS × ${current}
-               </span>`
-        }<br><br>
-
-       Maximum WIN streak:
-        <b>${maxWin}</b><br>
-
-       Maximum LOSS streak:
-        <b>${maxLoss}</b><br>
-
-       Evaluated:
-        <b>${records.length}</b>
-        predictions<br>
-
-       <span class="note">
-        Only last 100 evaluated predictions are used.
-       </span>`;
-
-  }else{
-
-    $("winloss").textContent =
-      "No evaluated predictions yet.";
-
-  }
-
-
-  /*
-  WARNING
-  */
-
-  const max =
-    Math.max(
-      ns.len,
-      ss.len,
-      cs.len
-    );
-
-  if(max >= 5){
-
-    $("warning").textContent =
-      "5+ streak detected in last 100. This is descriptive only; a reversal is not guaranteed.";
-
-  }else if(max >= 3){
-
-    $("warning").textContent =
-      "3–4 result streak detected in last 100.";
-
-  }else{
-
-    $("warning").textContent =
-      "No 3+ current streak.";
-
-  }
-
-}
-
-
-/*
-HISTORY
-*/
+/* --------------------------------
+   HISTORY
+-------------------------------- */
 
 function renderHistory(){
 
-  const arr =
-    last100();
+  let box=document.getElementById("history");
 
-  $("historyList").innerHTML =
-    arr.map(
-      n=>
-        `<span class="pill">${n}</span>`
-    ).join("")
-    ||
-    `<span class="note">
-      No results yet.
-    </span>`;
+  if(!data.length){
 
+    box.textContent="No results yet.";
+    return;
+  }
 
-  $("fullHistory").textContent =
-    data.length
-      ? data.join(" → ")
-      : "No results yet.";
+  let recent=data.slice(-100).reverse();
 
+  box.innerHTML=recent.map((n,i)=>{
+
+    return `
+      <span class="pill">
+        ${n}
+      </span>
+    `;
+
+  }).join("");
 }
 
+/* --------------------------------
+   START
+-------------------------------- */
 
 render();
 
-})();
 </script>
 
 </body>
