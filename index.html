@@ -1,1188 +1,2196 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Number Probability Analyzer V5</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#0b0d10;color:#f5f7fa;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
-.wrap{max-width:920px;margin:auto;padding:14px}
-.title{font-size:25px;font-weight:800}
-.sub{color:#9aa3ad;font-size:13px;margin:4px 0 14px}
-.card{background:#171a1f;border:1px solid #30353d;border-radius:16px;padding:14px;margin:10px 0}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.stat{background:#1d2128;border:1px solid #343a43;border-radius:13px;padding:13px}
-.label{font-size:11px;color:#9aa3ad;letter-spacing:.4px;text-transform:uppercase}
-.value{font-size:25px;font-weight:800;margin-top:4px}
-.buttons{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-.btn,.action{border:1px solid #363c45;border-radius:12px;background:#22262c;color:#fff;font-weight:800}
-.btn{min-height:52px;font-size:20px}
-.actions{display:flex;gap:8px;margin-top:9px}
-.action{flex:1;padding:11px}
-.tabs{display:flex;gap:6px;overflow:auto;margin:8px 0 12px}
-.tab{white-space:nowrap;padding:10px 13px;border-radius:11px;border:1px solid #363c45;background:#181c21;color:#bfc5cc;font-weight:700}
-.tab.active{background:#303640;color:#fff}
-.hide{display:none}
-.note{font-size:13px;color:#aeb5bd;line-height:1.5}
-.pred{font-size:30px;font-weight:900}
-.badge{display:inline-block;padding:5px 8px;border-radius:8px;background:#252a31;margin:2px;font-size:12px}
-.good{color:#4bd184}
-.bad{color:#ff6868}
-.num{display:inline-grid;place-items:center;width:45px;height:45px;border-radius:50%;background:#252a31;border:1px solid #464d58;font-weight:900;font-size:20px;margin:3px}
-.history{display:flex;flex-wrap:wrap;gap:5px}
-.pill{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:1px solid #3a4048;font-weight:800}
-.sectionTitle{font-weight:800;margin-bottom:10px}
-@media(min-width:650px){.grid{grid-template-columns:repeat(4,1fr)}}
+
+body{
+ margin:0;
+ background:#0b0d10;
+ color:#f5f7fa;
+ font-family:system-ui,-apple-system,Segoe UI,sans-serif
+}
+
+.wrap{
+ max-width:900px;
+ margin:auto;
+ padding:16px
+}
+
+.title{
+ font-size:25px;
+ font-weight:800
+}
+
+.sub{
+ color:#aab1ba;
+ font-size:13px;
+ margin:4px 0 14px
+}
+
+.card{
+ background:#171a1f;
+ border:1px solid #30353d;
+ border-radius:16px;
+ padding:14px;
+ margin:10px 0
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:10px
+}
+
+.label{
+ font-size:11px;
+ color:#9aa3ad;
+ letter-spacing:.5px
+}
+
+.value{
+ font-size:25px;
+ font-weight:800;
+ margin-top:3px
+}
+
+.tabs{
+ display:flex;
+ gap:6px;
+ overflow:auto;
+ margin:8px 0 12px
+}
+
+.tab{
+ white-space:nowrap;
+ padding:10px 13px;
+ border-radius:11px;
+ border:1px solid #363c45;
+ background:#181c21;
+ color:#bfc5cc;
+ font-weight:700
+}
+
+.tab.active{
+ background:#303640;
+ color:#fff
+}
+
+.buttons{
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
+ gap:8px;
+ margin-top:12px
+}
+
+.btn{
+ min-height:54px;
+ border:1px solid #363c45;
+ border-radius:12px;
+ background:#22262c;
+ color:#fff;
+ font-size:20px;
+ font-weight:800
+}
+
+.btn:active{
+ transform:scale(.97)
+}
+
+.actions{
+ display:flex;
+ gap:8px;
+ margin-top:9px
+}
+
+.action{
+ flex:1;
+ padding:11px;
+ border-radius:10px;
+ border:1px solid #363c45;
+ background:#20242a;
+ color:#fff
+}
+
+.row{
+ display:flex;
+ justify-content:space-between;
+ font-size:13px;
+ margin-top:9px
+}
+
+.bar{
+ height:8px;
+ background:#30353d;
+ border-radius:8px;
+ margin-top:4px;
+ overflow:hidden
+}
+
+.fill{
+ height:100%;
+ background:#8c96a3
+}
+
+.history{
+ display:flex;
+ flex-wrap:wrap;
+ gap:6px;
+ margin-top:10px
+}
+
+.pill{
+ width:35px;
+ height:35px;
+ border-radius:50%;
+ display:grid;
+ place-items:center;
+ border:1px solid #3a4048;
+ font-weight:800
+}
+
+.note{
+ font-size:13px;
+ color:#aeb5bd;
+ line-height:1.5
+}
+
+.good{
+ color:#4bd184
+}
+
+.bad{
+ color:#ff6868
+}
+
+.warn{
+ color:#ffbf66
+}
+
+.badge{
+ display:inline-block;
+ padding:5px 8px;
+ border-radius:8px;
+ background:#252a31;
+ margin:2px;
+ font-size:12px
+}
+
+.num{
+ display:inline-grid;
+ place-items:center;
+ width:48px;
+ height:48px;
+ border-radius:50%;
+ border:1px solid #464d58;
+ background:#252a31;
+ font-size:21px;
+ font-weight:900;
+ margin:3px
+}
+
+.prediction-box{
+ background:#1d2128;
+ border:1px solid #343a43;
+ border-radius:14px;
+ padding:14px;
+ margin-top:10px
+}
+
+.prediction-main{
+ font-size:30px;
+ font-weight:900
+}
+
+.strength{
+ display:inline-block;
+ padding:5px 9px;
+ border-radius:8px;
+ background:#252a31;
+ margin-top:6px;
+ font-size:12px;
+ font-weight:800
+}
+
+.hide{
+ display:none
+}
+
+table{
+ width:100%;
+ border-collapse:collapse;
+ font-size:13px
+}
+
+td,th{
+ padding:8px 5px;
+ border-bottom:1px solid #2b3037;
+ text-align:left
+}
+
+th{
+ color:#9aa3ad
+}
+
+@media(min-width:650px){
+ .grid{
+  grid-template-columns:repeat(4,1fr)
+ }
+}
 </style>
 </head>
 
 <body>
+
 <div class="wrap">
 
-<div class="title">Number Probability Analyzer V5</div>
+<div class="title">
+Number Probability Analyzer V5
+</div>
+
 <div class="sub">
-Multi-pattern statistical analyzer • Last 20 / 50 / 100 / 200
+0–4 = Small • 5–9 = Big • Multi-pattern statistical analysis
 </div>
 
 <div class="tabs">
-<button class="tab active" data-tab="dash">Dashboard</button>
-<button class="tab" data-tab="patterns">Patterns</button>
-<button class="tab" data-tab="streaks">Streaks</button>
-<button class="tab" data-tab="history">History</button>
+
+<button class="tab active" data-tab="dash">
+Dashboard
+</button>
+
+<button class="tab" data-tab="patterns">
+Patterns
+</button>
+
+<button class="tab" data-tab="streaks">
+Streaks
+</button>
+
+<button class="tab" data-tab="history">
+History
+</button>
+
 </div>
+
+
+<!-- ================= DASHBOARD ================= -->
 
 <section id="dash">
 
 <div class="grid">
-<div class="stat">
-<div class="label">Total Data</div>
+
+<div class="card">
+<div class="label">TOTAL DATA</div>
 <div id="total" class="value">0</div>
 </div>
 
-<div class="stat">
-<div class="label">Latest</div>
-<div id="latest" class="value">—</div>
-</div>
-
-<div class="stat">
-<div class="label">Current Type</div>
-<div id="curType" class="value">—</div>
-</div>
-
-<div class="stat">
-<div class="label">Current Win/Loss</div>
-<div id="curWL" class="value">—</div>
-</div>
+<div class="card">
+<div class="label">SMALL</div>
+<div id="small" class="value">—</div>
 </div>
 
 <div class="card">
-<div class="sectionTitle">ENTER RESULT</div>
+<div class="label">BIG</div>
+<div id="big" class="value">—</div>
+</div>
+
+<div class="card">
+<div class="label">LATEST</div>
+<div id="latest" class="value">—</div>
+</div>
+
+</div>
+
+
+<!-- ENTER RESULT -->
+
+<div class="card">
+
+<b>ENTER RESULT</b>
 
 <div class="buttons" id="buttons"></div>
 
 <div class="actions">
-<button class="action" id="undo">Undo</button>
-<button class="action" id="clear">Clear All</button>
-</div>
+
+<button class="action" id="undo">
+Undo
+</button>
+
+<button class="action" id="clear">
+Clear All
+</button>
+
 </div>
 
+</div>
+
+
+<!-- FINAL SYSTEM RESULT -->
+
 <div class="card">
-<div class="sectionTitle">FINAL PREDICTION</div>
+
+<b>SYSTEM RESULT</b>
+
+<div class="prediction-box">
+
+<div class="label">
+BIG / SMALL
+</div>
+
+<div id="finalBS" class="prediction-main">
+—
+</div>
+
+<div id="strength" class="strength">
+NO DATA
+</div>
+
+</div>
+
 
 <div class="grid">
 
-<div class="stat">
-<div class="label">Big / Small</div>
-<div id="finalBS" class="pred">—</div>
-<div id="strength" class="badge">NO DATA</div>
-</div>
-
-<div class="stat">
-<div class="label">Big Probability</div>
-<div id="bigProb" class="value">—</div>
-</div>
-
-<div class="stat">
-<div class="label">Small Probability</div>
-<div id="smallProb" class="value">—</div>
-</div>
-
-<div class="stat">
-<div class="label">Sample</div>
-<div id="sample" class="value">—</div>
-</div>
-
-</div>
+<div class="card">
+<div class="label">BIG PROBABILITY</div>
+<div id="nextBig" class="value">—</div>
 </div>
 
 <div class="card">
-<div class="sectionTitle">MOST LIKELY NUMBER — MAX 2</div>
-<div id="topNumbers">—</div>
-<div id="numberReason" class="note"></div>
+<div class="label">SMALL PROBABILITY</div>
+<div id="nextSmall" class="value">—</div>
 </div>
 
 <div class="card">
-<div class="sectionTitle">WINDOW COMPARISON</div>
-<div id="windows" class="note">Need data.</div>
+<div class="label">LIKELY NUMBER 1</div>
+<div id="number1" class="value">—</div>
+</div>
+
+<div class="card">
+<div class="label">LIKELY NUMBER 2</div>
+<div id="number2" class="value">—</div>
+</div>
+
+</div>
+
+<div class="note" id="predictionReason">
+Need more data.
+</div>
+
+</div>
+
+
+<!-- WINDOW ANALYSIS -->
+
+<div class="card">
+
+<b>RECENT DATA ANALYSIS</b>
+
+<div id="windows" class="note">
+Need more data.
+</div>
+
+</div>
+
+
+<!-- FREQUENCY -->
+
+<div class="card">
+
+<b>0–9 PROBABILITY / FREQUENCY</b>
+
+<div id="freq">
+</div>
+
+</div>
+
+
+<!-- AUTO PREDICTION -->
+
+<div class="card">
+
+<b>AUTO PREDICTION TRACKING</b>
+
+<div id="prediction" class="note">
+Prediction tracking will appear after enough data.
+</div>
+
 </div>
 
 </section>
+
+
+<!-- ================= PATTERNS ================= -->
 
 <section id="patterns" class="hide">
 
 <div class="card">
-<div class="sectionTitle">1-STEP → NEXT</div>
-<div id="oneStep" class="note">Need more data.</div>
+
+<b>1 NUMBER → NEXT</b>
+
+<div id="transition" class="note">
+Enter at least 2 results.
 </div>
 
-<div class="card">
-<div class="sectionTitle">2-NUMBER SEQUENCE → NEXT</div>
-<div id="twoStep" class="note">Need more data.</div>
 </div>
 
-<div class="card">
-<div class="sectionTitle">3-NUMBER SEQUENCE → NEXT</div>
-<div id="threeStep" class="note">Need more data.</div>
-</div>
 
 <div class="card">
-<div class="sectionTitle">SKIP PATTERNS</div>
-<div id="skip" class="note">Need more data.</div>
+
+<b>2 NUMBERS → NEXT</b>
+
+<div id="twoPattern" class="note">
+Need more data.
 </div>
 
-<div class="card">
-<div class="sectionTitle">BIG / SMALL SEQUENCES</div>
-<div id="bsPatterns" class="note">Need more data.</div>
 </div>
 
-<div class="card">
-<div class="sectionTitle">GAP / RECURRENCE</div>
-<div id="gap" class="note">Need more data.</div>
-</div>
 
 <div class="card">
-<div class="sectionTitle">HOT / COLD</div>
-<div id="hotcold" class="note">Need more data.</div>
+
+<b>3 NUMBERS → NEXT</b>
+
+<div id="threePattern" class="note">
+Need more data.
 </div>
 
+</div>
+
+
 <div class="card">
-<div class="sectionTitle">SUPPORTING SIGNALS</div>
-<div id="signals" class="note">Need more data.</div>
+
+<b>SKIP PATTERNS</b>
+
+<div id="skipPattern" class="note">
+Need more data.
+</div>
+
+</div>
+
+
+<div class="card">
+
+<b>BIG / SMALL PATTERNS</b>
+
+<div id="bsPattern" class="note">
+Need more data.
+</div>
+
+</div>
+
+
+<div class="card">
+
+<b>NUMBER GAP / RECURRENCE</b>
+
+<div id="gapPattern" class="note">
+Need more data.
+</div>
+
+</div>
+
+
+<div class="card">
+
+<b>HOT / COLD NUMBERS</b>
+
+<div id="hotCold" class="note">
+Need more data.
+</div>
+
+</div>
+
+
+<div class="card">
+
+<b>SUPPORTING PATTERNS</b>
+
+<div id="support" class="note">
+Need more data.
+</div>
+
 </div>
 
 </section>
+
+
+<!-- ================= STREAKS ================= -->
 
 <section id="streaks" class="hide">
 
 <div class="card">
-<div class="sectionTitle">CURRENT PREDICTION STREAK</div>
-<div id="currentWL" class="pred">—</div>
-<div id="wlDetail" class="note"></div>
+
+<b>CURRENT WIN / LOSS STREAK</b>
+
+<div id="currentWL"
+class="prediction-main">
+—
 </div>
 
-<div class="card">
-<div class="sectionTitle">LAST 100 — MAX WIN / LOSS</div>
-<div id="streak100" class="note">No data.</div>
+<div id="wlDetail"
+class="note">
+No evaluated prediction yet.
 </div>
 
-<div class="card">
-<div class="sectionTitle">LAST 200 — MAX WIN / LOSS</div>
-<div id="streak200" class="note">No data.</div>
 </div>
 
+
 <div class="card">
-<div class="sectionTitle">BACKTESTING</div>
-<div id="backtest" class="note">Need more data.</div>
+
+<b>LAST 100 — MAX WIN / LOSS</b>
+
+<div id="max100"
+class="note">
+Need more data.
+</div>
+
+</div>
+
+
+<div class="card">
+
+<b>LAST 200 — MAX WIN / LOSS</b>
+
+<div id="max200"
+class="note">
+Need more data.
+</div>
+
+</div>
+
+
+<div class="card">
+
+<b>BACKTESTING</b>
+
+<div id="backtest"
+class="note">
+Need more data.
+</div>
+
 </div>
 
 </section>
+
+
+<!-- ================= HISTORY ================= -->
 
 <section id="history" class="hide">
 
 <div class="card">
-<div class="sectionTitle">LAST 100 RESULTS</div>
-<div id="historyList" class="history"></div>
+
+<b>LAST 100 RESULTS</b>
+
+<div id="historyList"
+class="history">
 </div>
 
+</div>
+
+
 <div class="card">
-<div class="sectionTitle">FULL SEQUENCE</div>
-<div id="fullHistory" class="note">No results.</div>
+
+<b>FULL SEQUENCE</b>
+
+<div id="fullHistory"
+class="note">
+No results yet.
+</div>
+
 </div>
 
 </section>
 
+
 <div class="card">
-<div class="sectionTitle">IMPORTANT</div>
+
+<b>IMPORTANT</b>
+
 <div class="note">
-Statistical estimate only. Random outcomes can break historical patterns.
-More patterns do not guarantee higher future accuracy; backtesting is used
-to reduce overfitting.
-</div>
+
+This is a statistical analyzer only.
+Patterns can change or disappear.
+Historical probability does not guarantee the next result.
+
 </div>
 
 </div>
+
+</div>
+
 
 <script>
-(()=>{
+  /* ================= DATA ================= */
 
-let data=JSON.parse(localStorage.getItem("numberAnalyzerV5")||"[]");
+let data = [];
+let predictionRecords = [];
 
-if(!Array.isArray(data))data=[];
+const $ = id => document.getElementById(id);
 
-let predictionRecords=
-JSON.parse(localStorage.getItem("numberAnalyzerV5Predictions")||"[]");
+const isSmall = n => n <= 4;
+const isBig = n => n >= 5;
+const category = n => isSmall(n) ? "SMALL" : "BIG";
 
-if(!Array.isArray(predictionRecords))
-predictionRecords=[];
+const pct = (a,b) => b ? Math.round((a/b)*100) : 0;
 
-const $=id=>document.getElementById(id);
 
-const isBig=n=>n>=5;
-
-const type=n=>isBig(n)?"BIG":"SMALL";
-
-const pct=(a,b)=>b?100*a/b:0;
-
-function save(){
-
-localStorage.setItem(
-"numberAnalyzerV5",
-JSON.stringify(data)
-);
-
-localStorage.setItem(
-"numberAnalyzerV5Predictions",
-JSON.stringify(predictionRecords)
-);
-
-}
+/* ================= BUTTONS ================= */
 
 for(let n=0;n<10;n++){
 
-const b=document.createElement("button");
+ const b = document.createElement("button");
 
-b.className="btn";
+ b.className = "btn";
+ b.type = "button";
+ b.textContent = n;
 
-b.type="button";
+ b.addEventListener("click",()=>{
+   addResult(n);
+ });
 
-b.textContent=n;
+ $("buttons").appendChild(b);
+}
 
-b.onclick=()=>addResult(n);
 
-$("buttons").appendChild(b);
+/* ================= STORAGE ================= */
+
+function saveData(){
+
+ localStorage.setItem(
+   "NPA_V5_DATA",
+   JSON.stringify(data)
+ );
+
+ localStorage.setItem(
+   "NPA_V5_PREDICTIONS",
+   JSON.stringify(predictionRecords)
+ );
 
 }
 
-$("undo").onclick=()=>{
+function loadData(){
 
-if(data.length){
+ try{
 
-data.pop();
+   const d =
+   JSON.parse(
+     localStorage.getItem("NPA_V5_DATA")
+   );
 
-if(predictionRecords.length)
-predictionRecords.pop();
+   const p =
+   JSON.parse(
+     localStorage.getItem("NPA_V5_PREDICTIONS")
+   );
 
-save();
+   if(Array.isArray(d))
+   data=d;
 
-render();
+   if(Array.isArray(p))
+   predictionRecords=p;
 
-}
+ }catch(e){
 
-};
+   data=[];
+   predictionRecords=[];
 
-$("clear").onclick=()=>{
-
-if(confirm("Clear all results and prediction history?")){
-
-data=[];
-
-predictionRecords=[];
-
-save();
-
-render();
+ }
 
 }
 
-};
+loadData();
 
-document.querySelectorAll(".tab").forEach(btn=>{
 
-btn.onclick=()=>{
+/* ================= BASIC COUNT ================= */
 
-document.querySelectorAll(".tab")
-.forEach(x=>x.classList.remove("active"));
+function countTypes(arr){
 
-btn.classList.add("active");
+ const big =
+ arr.filter(isBig).length;
 
-["dash","patterns","streaks","history"]
-.forEach(id=>
-$(id).classList.toggle(
-"hide",
-id!==btn.dataset.tab
-));
+ const small =
+ arr.length-big;
 
-};
+ return {
 
-});
+   big,
+   small,
+   bigPct:pct(big,arr.length),
+   smallPct:pct(small,arr.length)
 
-function counts(arr){
-
-let big=arr.filter(isBig).length;
-
-return{
-
-big,
-
-small:arr.length-big,
-
-total:arr.length,
-
-bigPct:pct(big,arr.length),
-
-smallPct:pct(arr.length-big,arr.length)
-
-};
+ };
 
 }
 
-function conditionalNext(arr,h){
 
-if(arr.length<=h)return[];
+/* ================= NUMBER FREQUENCY ================= */
 
-const map={};
+function numberFrequency(arr){
 
-for(let i=h;i<arr.length;i++){
+ const c =
+ Array(10).fill(0);
 
-const key=arr.slice(i-h,i).join(",");
+ arr.forEach(n=>{
+   c[n]++;
+ });
 
-if(!map[key])
-map[key]=Array(10).fill(0);
-
-map[key][arr[i]]++;
-
-}
-
-const key=arr.slice(-h).join(",");
-
-if(!map[key])return[];
-
-return map[key]
-
-.map((v,n)=>({n,v}))
-
-.filter(x=>x.v)
-
-.sort((a,b)=>b.v-a.v);
+ return c;
 
 }
 
-function skipNext(arr,gap){
 
-if(arr.length<=gap)return[];
+/* ================= 1 NUMBER → NEXT ================= */
 
-const map={};
+function oneStep(arr,last){
 
-for(let i=gap;i<arr.length;i++){
+ const counts =
+ Array(10).fill(0);
 
-const key=String(arr[i-gap]);
+ for(
+   let i=0;
+   i<arr.length-1;
+   i++
+ ){
 
-if(!map[key])
-map[key]=Array(10).fill(0);
+   if(arr[i]===last)
+   counts[arr[i+1]]++;
 
-map[key][arr[i]]++;
+ }
 
-}
-
-const key=String(
-arr[arr.length-1-gap]
-);
-
-if(!map[key])return[];
-
-return map[key]
-
-.map((v,n)=>({n,v}))
-
-.filter(x=>x.v)
-
-.sort((a,b)=>b.v-a.v);
+ return counts
+ .map((v,n)=>({number:n,count:v}))
+ .filter(x=>x.count>0)
+ .sort((a,b)=>b.count-a.count);
 
 }
 
-function transition(arr,last){
 
-const c=Array(10).fill(0);
+/* ================= 2 NUMBERS → NEXT ================= */
 
-for(let i=0;i<arr.length-1;i++){
+function twoStep(arr){
 
-if(arr[i]===last)
-c[arr[i+1]]++;
+ if(arr.length<3)
+ return [];
 
-}
+ const map={};
 
-return c
+ for(
+   let i=2;
+   i<arr.length;
+   i++
+ ){
 
-.map((v,n)=>({n,v}))
+   const key =
+   arr[i-2]+","+arr[i-1];
 
-.filter(x=>x.v)
+   if(!map[key])
+   map[key]=Array(10).fill(0);
 
-.sort((a,b)=>b.v-a.v);
+   map[key][arr[i]]++;
 
-}
+ }
 
-function weightedNumberScores(arr){
+ const key =
+ arr[arr.length-2]+","+arr[arr.length-1];
 
-const score=Array(10).fill(0);
+ if(!map[key])
+ return [];
 
-const N=arr.length;
-
-arr.forEach((n,i)=>{
-
-const age=N-i;
-
-const w=
-age<=20?4:
-age<=50?3:
-age<=100?2:1;
-
-score[n]+=w;
-
-});
-
-return score;
+ return map[key]
+ .map((v,n)=>({number:n,count:v}))
+ .filter(x=>x.count>0)
+ .sort((a,b)=>b.count-a.count);
 
 }
 
-function gapStats(arr){
 
-const out=[];
+/* ================= 3 NUMBERS → NEXT ================= */
 
-for(let n=0;n<10;n++){
+function threeStep(arr){
 
-const pos=[];
+ if(arr.length<4)
+ return [];
 
-for(let i=0;i<arr.length;i++){
+ const map={};
 
-if(arr[i]===n)
-pos.push(i);
+ for(
+   let i=3;
+   i<arr.length;
+   i++
+ ){
 
-}
+   const key =
+   arr[i-3]+","+
+   arr[i-2]+","+
+   arr[i-1];
 
-if(pos.length>=2){
+   if(!map[key])
+   map[key]=Array(10).fill(0);
 
-const gaps=[];
+   map[key][arr[i]]++;
 
-for(let i=1;i<pos.length;i++)
-gaps.push(pos[i]-pos[i-1]);
+ }
 
-out.push({
+ const key =
+ arr[arr.length-3]+","+
+ arr[arr.length-2]+","+
+ arr[arr.length-1];
 
-n,
+ if(!map[key])
+ return [];
 
-count:pos.length,
-
-avg:gaps.reduce((a,b)=>a+b,0)/gaps.length,
-
-since:arr.length-1-pos[pos.length-1]
-
-});
-
-}
-
-}
-
-return out;
-
-}
-
-function bsTransition(arr){
-
-const m={};
-
-for(let i=0;i<arr.length-1;i++){
-
-const a=type(arr[i]);
-
-const b=type(arr[i+1]);
-
-if(!m[a])
-m[a]={BIG:0,SMALL:0};
-
-m[a][b]++;
+ return map[key]
+ .map((v,n)=>({number:n,count:v}))
+ .filter(x=>x.count>0)
+ .sort((a,b)=>b.count-a.count);
 
 }
 
-return m;
+
+/* ================= SKIP 1 ================= */
+
+function skipOne(arr){
+
+ if(arr.length<2)
+ return [];
+
+ const map={};
+
+ for(
+   let i=1;
+   i<arr.length;
+   i++
+ ){
+
+   const key =
+   String(arr[i-1]);
+
+   if(!map[key])
+   map[key]=Array(10).fill(0);
+
+   map[key][arr[i]]++;
+
+ }
+
+ const key =
+ String(arr[arr.length-1]);
+
+ if(!map[key])
+ return [];
+
+ return map[key]
+ .map((v,n)=>({number:n,count:v}))
+ .filter(x=>x.count>0)
+ .sort((a,b)=>b.count-a.count);
 
 }
 
-function strength(diff){
 
-if(diff>=20)
-return "STRONG";
+/* ================= SKIP 2 ================= */
 
-if(diff>=10)
-return "MEDIUM";
+function skipTwo(arr){
 
-if(diff>=4)
-return "WEAK";
+ if(arr.length<3)
+ return [];
 
-return "NO CLEAR EDGE";
+ const map={};
 
-}
+ for(
+   let i=2;
+   i<arr.length;
+   i++
+ ){
 
-function calculatePrediction(
-hist=data.slice(-200)
-){
+   const key =
+   String(arr[i-2]);
 
-if(!hist.length)
-return null;
+   if(!map[key])
+   map[key]=Array(10).fill(0);
 
-const a100=hist.slice(-100);
+   map[key][arr[i]]++;
 
-const a200=hist;
+ }
 
-const p100=counts(a100);
+ const key =
+ String(arr[arr.length-2]);
 
-const p200=counts(a200);
+ if(!map[key])
+ return [];
 
-let big=
-p100.bigPct*.55+
-p200.bigPct*.45;
-
-let small=100-big;
-
-const last=hist[hist.length-1];
-
-const tr=transition(hist,last);
-
-if(tr.length){
-
-const total=
-tr.reduce((s,x)=>s+x.v,0);
-
-const tb=
-tr
-.filter(x=>isBig(x.n))
-.reduce((s,x)=>s+x.v,0);
-
-const transitionBig=
-pct(tb,total);
-
-big=
-big*.80+
-transitionBig*.20;
-
-small=100-big;
+ return map[key]
+ .map((v,n)=>({number:n,count:v}))
+ .filter(x=>x.count>0)
+ .sort((a,b)=>b.count-a.count);
 
 }
 
-let score=
-weightedNumberScores(hist);
 
-const patterns=[
+/* ================= GAP ================= */
 
-{
-list:conditionalNext(hist,2),
-mult:2
-},
+function gapAnalysis(arr){
 
-{
-list:conditionalNext(hist,3),
-mult:2.5
-},
+ const result=[];
 
-{
-list:skipNext(hist,1),
-mult:1.4
-},
+ for(let n=0;n<10;n++){
 
-{
-list:skipNext(hist,2),
-mult:1.2
-}
+   const positions=[];
 
-];
+   for(
+     let i=0;
+     i<arr.length;
+     i++
+   ){
 
-patterns.forEach(p=>
+     if(arr[i]===n)
+     positions.push(i);
 
-p.list.forEach(x=>
+   }
 
-score[x.n]+=x.v*p.mult
+   if(positions.length>=2){
 
-)
+     const gaps=[];
 
-);
+     for(
+       let i=1;
+       i<positions.length;
+       i++
+     ){
 
-tr.slice(0,5).forEach(x=>
+       gaps.push(
+         positions[i]-positions[i-1]
+       );
 
-score[x.n]+=x.v*1.5
+     }
 
-);
+     const average =
+     gaps.reduce(
+       (a,b)=>a+b,0
+     )/gaps.length;
 
-const totalScore=
-score.reduce((a,b)=>a+b,0);
+     const since =
+     arr.length-1-
+     positions[positions.length-1];
 
-const ranked=
-score
+     result.push({
 
-.map((s,n)=>({
+       number:n,
+       count:positions.length,
+       average,
+       since
 
-n,
+     });
 
-score:s,
+   }
 
-p:totalScore?
-pct(s,totalScore):0
+ }
 
-}))
-
-.sort((a,b)=>b.score-a.score);
-
-return{
-
-big,
-
-small,
-
-ranked,
-
-a100,
-
-a200
-
-};
+ return result;
 
 }
 
-function createPredictionSnapshot(){
 
-const p=calculatePrediction();
+/* ================= BIG/SMALL SEQUENCE ================= */
 
-if(!p)
-return null;
+function bsSequence(arr){
 
-const bs=
-p.big>=p.small?
-"BIG":
-"SMALL";
+ const result={
+   BB:0,
+   BS:0,
+   SB:0,
+   SS:0
+ };
 
-const nums=
-p.ranked
-.slice(0,2)
-.map(x=>x.n);
+ for(
+   let i=0;
+   i<arr.length-1;
+   i++
+ ){
 
-return{
+   const a =
+   isBig(arr[i])?"B":"S";
 
-bs,
+   const b =
+   isBig(arr[i+1])?"B":"S";
 
-nums,
+   result[a+b]++;
 
-big:p.big,
+ }
 
-small:p.small
-
-};
+ return result;
 
 }
+
+
+/* ================= STREAK ================= */
+
+function currentStreak(records){
+
+ if(!records.length)
+ return {
+   type:null,
+   length:0
+ };
+
+ const last =
+ records[records.length-1];
+
+ const current =
+ last.win ?
+ "WIN" :
+ "LOSS";
+
+ let length=1;
+
+ for(
+   let i=records.length-2;
+   i>=0;
+   i--
+ ){
+
+   const v =
+   records[i].win ?
+   "WIN" :
+   "LOSS";
+
+   if(v===current)
+   length++;
+   else
+   break;
+
+ }
+
+ return {
+   type:current,
+   length
+ };
+
+}
+
+
+/* ================= MAX WIN / LOSS ================= */
+
+function maxWinLoss(records){
+
+ let win=0;
+ let loss=0;
+
+ let maxWin=0;
+ let maxLoss=0;
+
+ records.forEach(r=>{
+
+   if(r.win){
+
+     win++;
+     loss=0;
+
+     if(win>maxWin)
+     maxWin=win;
+
+   }else{
+
+     loss++;
+     win=0;
+
+     if(loss>maxLoss)
+     maxLoss=loss;
+
+   }
+
+ });
+
+ return {
+   maxWin,
+   maxLoss
+ };
+
+}
+
+
+/* ================= STRENGTH ================= */
+
+function getStrength(diff,sample){
+
+ if(sample<10)
+ return "WEAK";
+
+ if(diff>=20)
+ return "STRONG";
+
+ if(diff>=10)
+ return "MEDIUM";
+
+ if(diff>=5)
+ return "WEAK";
+
+ return "NO CLEAR EDGE";
+
+}
+
+
+/* ================= NUMBER SCORE ================= */
+
+function numberScores(arr){
+
+ const score =
+ Array(10).fill(0);
+
+ const freq =
+ numberFrequency(arr);
+
+ /* Frequency */
+
+ for(let n=0;n<10;n++){
+
+   score[n] +=
+   freq[n]*1.5;
+
+ }
+
+
+ /* Recent 20 */
+
+ const recent20 =
+ arr.slice(-20);
+
+ recent20.forEach(n=>{
+   score[n]+=3;
+ });
+
+
+ /* Recent 50 */
+
+ const recent50 =
+ arr.slice(-50);
+
+ recent50.forEach(n=>{
+   score[n]+=2;
+ });
+
+
+ /* 1 step */
+
+ if(arr.length){
+
+   const a =
+   oneStep(
+     arr,
+     arr[arr.length-1]
+   );
+
+   a.forEach(x=>{
+     score[x.number]+=
+     x.count*2;
+   });
+
+ }
+
+
+ /* 2 step */
+
+ twoStep(arr)
+ .forEach(x=>{
+   score[x.number]+=
+   x.count*3;
+ });
+
+
+ /* 3 step */
+
+ threeStep(arr)
+ .forEach(x=>{
+   score[x.number]+=
+   x.count*4;
+ });
+
+
+ /* Skip */
+
+ skipOne(arr)
+ .forEach(x=>{
+   score[x.number]+=
+   x.count*1.5;
+ });
+
+
+ skipTwo(arr)
+ .forEach(x=>{
+   score[x.number]+=
+   x.count*1.5;
+ });
+
+
+ return score;
+
+}
+
+
+/* ================= FINAL PREDICTION ================= */
+
+function calculatePrediction(){
+
+ if(data.length<5)
+ return null;
+
+ const d20 =
+ data.slice(-20);
+
+ const d50 =
+ data.slice(-50);
+
+ const d100 =
+ data.slice(-100);
+
+ const d200 =
+ data.slice(-200);
+
+
+ const c20 =
+ countTypes(d20);
+
+ const c50 =
+ countTypes(d50);
+
+ const c100 =
+ countTypes(d100);
+
+ const c200 =
+ countTypes(d200);
+
+
+ /*
+ Recent data gets higher weight.
+ */
+
+ let bigProbability =
+
+ c20.bigPct*0.35+
+
+ c50.bigPct*0.25+
+
+ c100.bigPct*0.20+
+
+ c200.bigPct*0.20;
+
+
+ /*
+ 1-step transition
+ */
+
+ const last =
+ data[data.length-1];
+
+ const trans =
+ oneStep(d200,last);
+
+ if(trans.length){
+
+   const total =
+   trans.reduce(
+     (a,b)=>a+b.count,0
+   );
+
+   const bigCount =
+   trans
+   .filter(x=>isBig(x.number))
+   .reduce(
+     (a,b)=>a+b.count,0
+   );
+
+   const transitionBig =
+   pct(bigCount,total);
+
+   bigProbability =
+   bigProbability*0.75+
+   transitionBig*0.25;
+
+ }
+
+
+ let smallProbability =
+ 100-bigProbability;
+
+
+ /*
+ Decide category
+ */
+
+ const predicted =
+ bigProbability>=smallProbability
+ ?
+ "BIG"
+ :
+ "SMALL";
+
+
+ /*
+ Number scoring
+ */
+
+ const scores =
+ numberScores(d200);
+
+
+ /*
+ IMPORTANT:
+ only numbers from predicted
+ category are allowed.
+ */
+
+ const candidates=[];
+
+ for(let n=0;n<10;n++){
+
+   if(
+     predicted==="BIG" &&
+     n>=5
+   ){
+
+     candidates.push({
+       number:n,
+       score:scores[n]
+     });
+
+   }
+
+   if(
+     predicted==="SMALL" &&
+     n<=4
+   ){
+
+     candidates.push({
+       number:n,
+       score:scores[n]
+     });
+
+   }
+
+ }
+
+
+ candidates.sort(
+   (a,b)=>b.score-a.score
+ );
+
+
+ /*
+ Maximum 2 numbers
+ */
+
+ const topNumbers =
+ candidates
+ .slice(0,2);
+
+
+ return{
+
+   predicted,
+
+   bigProbability,
+
+   smallProbability,
+
+   topNumbers,
+
+   sample:d200.length,
+
+   c20,
+   c50,
+   c100,
+   c200
+
+ };
+
+}
+
+
+/* ================= SNAPSHOT ================= */
+
+function createPrediction(){
+
+ const p =
+ calculatePrediction();
+
+ if(!p)
+ return null;
+
+ return{
+
+   expected:p.predicted,
+
+   numbers:
+   p.topNumbers.map(
+     x=>x.number
+   ),
+
+   big:p.bigProbability,
+
+   small:p.smallProbability
+
+ };
+
+}
+
+
+/* ================= ADD RESULT ================= */
 
 function addResult(n){
 
-const snap=
-createPredictionSnapshot();
+ /*
+ Evaluate previous prediction
+ */
 
-if(snap){
+ const previous =
+ createPrediction();
 
-const actualType=
-type(n);
+ if(previous){
 
-const bsWin=
-snap.bs===actualType;
+   const win =
+   previous.expected ===
+   category(n);
 
-const numberWin=
-snap.nums.includes(n);
+   predictionRecords.push({
 
-predictionRecords.push({
+     expected:
+     previous.expected,
 
-bs:snap.bs,
+     numbers:
+     previous.numbers,
 
-nums:snap.nums,
+     actual:n,
 
-actual:n,
+     win,
 
-bsWin,
+     time:Date.now()
 
-numberWin,
+   });
 
-time:Date.now()
+ }
+
+ data.push(n);
+
+ saveData();
+
+ render();
+
+}
+
+
+/* ================= UNDO ================= */
+
+$("undo").onclick=()=>{
+
+ if(!data.length)
+ return;
+
+ data.pop();
+
+ if(predictionRecords.length)
+ predictionRecords.pop();
+
+ saveData();
+
+ render();
+
+};
+
+
+/* ================= CLEAR ================= */
+
+$("clear").onclick=()=>{
+
+ if(
+   confirm(
+     "Clear all results and prediction history?"
+   )
+ ){
+
+   data=[];
+   predictionRecords=[];
+
+   saveData();
+
+   render();
+
+ }
+
+};
+
+
+/* ================= TABS ================= */
+
+document
+.querySelectorAll(".tab")
+.forEach(btn=>{
+
+ btn.addEventListener(
+   "click",
+   ()=>{
+
+     document
+     .querySelectorAll(".tab")
+     .forEach(x=>
+       x.classList.remove("active")
+     );
+
+     btn.classList.add("active");
+
+     [
+       "dash",
+       "patterns",
+       "streaks",
+       "history"
+     ].forEach(id=>{
+
+       $(id)
+       .classList.toggle(
+         "hide",
+         id!==btn.dataset.tab
+       );
+
+     });
+
+   }
+ );
 
 });
 
-}
 
-data.push(n);
+/* ================= RENDER DASHBOARD ================= */
 
-save();
+function renderDashboard(){
 
-render();
+ const N =
+ data.length;
 
-}
+ const c =
+ countTypes(data);
 
-function currentWL(records){
+ $("total").textContent=N;
 
-if(!records.length)
+ $("small").textContent=
+ N ?
+ c.smallPct+"%" :
+ "—";
 
-return{
+ $("big").textContent=
+ N ?
+ c.bigPct+"%" :
+ "—";
 
-type:null,
+ $("latest").textContent=
+ N ?
+ data[N-1] :
+ "—";
 
-len:0
 
-};
+ /* Frequency */
 
-const last=
-records[
-records.length-1
-].bsWin?
-"WIN":
-"LOSS";
+ const freq =
+ numberFrequency(data);
 
-let len=1;
+ $("freq").innerHTML=
+ freq.map(
+ (v,n)=>
 
-for(
-let i=records.length-2;
-i>=0;
-i--
-){
+ `<div class="row">
+ <span>${n} • ${category(n)}</span>
+ <b>${v} (${pct(v,N)}%)</b>
+ </div>
 
-const v=
-records[i].bsWin?
-"WIN":
-"LOSS";
+ <div class="bar">
+ <div class="fill"
+ style="width:${pct(v,N)}%">
+ </div>
+ </div>`
 
-if(v===last)
-len++;
-else
-break;
+ ).join("");
 
-}
 
-return{
+ /* Prediction */
 
-type:last,
+ const p =
+ calculatePrediction();
 
-len
+ if(!p){
 
-};
+   $("finalBS").textContent="—";
 
-}
+   $("nextBig").textContent="—";
 
-function maxStreak(records){
+   $("nextSmall").textContent="—";
 
-let maxWin=0;
+   $("number1").textContent="—";
 
-let maxLoss=0;
+   $("number2").textContent="—";
 
-let win=0;
+   $("strength").textContent="NO DATA";
 
-let loss=0;
+   $("predictionReason").textContent=
+   "Enter more results.";
 
-records.forEach(r=>{
+   return;
 
-if(r.bsWin){
+ }
 
-win++;
 
-loss=0;
+ $("finalBS").textContent=
+ p.predicted;
 
-maxWin=
-Math.max(maxWin,win);
+ $("nextBig").textContent=
+ p.bigProbability.toFixed(1)+"%";
 
-}else{
+ $("nextSmall").textContent=
+ p.smallProbability.toFixed(1)+"%";
 
-loss++;
 
-win=0;
+ $("number1").textContent=
+ p.topNumbers[0] ?
+ p.topNumbers[0].number :
+ "—";
 
-maxLoss=
-Math.max(maxLoss,loss);
+ $("number2").textContent=
+ p.topNumbers[1] ?
+ p.topNumbers[1].number :
+ "—";
 
-}
 
-});
-
-return{
-
-maxWin,
-
-maxLoss,
-
-total:records.length
-
-};
-
-}
-
-function render(){
-
-const N=data.length;
-
-$("total").textContent=N;
-
-$("latest").textContent=
-N?data[N-1]:"—";
-
-$("curType").textContent=
-N?type(data[N-1]):"—";
-
-const p=
-calculatePrediction();
-
-if(p){
-
-const bs=
-p.big>=p.small?
-"BIG":
-"SMALL";
-
-$("finalBS").textContent=bs;
-
-$("bigProb").textContent=
-p.big.toFixed(1)+"%";
-
-$("smallProb").textContent=
-p.small.toFixed(1)+"%";
-
-$("sample").textContent=
-p.a200.length;
-
-$("strength").textContent=
-strength(
-Math.abs(
-p.big-p.small
-)
-);
-
-const top=
-p.ranked.slice(0,2);
-
-$("topNumbers").innerHTML=
-top.map(x=>
-`<span class="num">${x.n}</span>`
-).join("");
-
-$("numberReason").textContent=
-top.map(x=>
-`${x.n}: score ${x.p.toFixed(1)}%`
-).join(" • ");
-
-$("windows").innerHTML=
-[20,50,100,200]
-.map(w=>{
-
-const c=
-counts(data.slice(-w));
-
-return `<span class="badge">
-Last ${w}: BIG ${c.bigPct.toFixed(1)}%
-• SMALL ${c.smallPct.toFixed(1)}%
-</span>`;
-
-}).join("");
-
-}else{
-
-$("finalBS").textContent="—";
-
-$("bigProb").textContent="—";
-
-$("smallProb").textContent="—";
-
-$("sample").textContent="0";
-
-$("topNumbers").textContent="—";
-
-$("strength").textContent="NO DATA";
+ $("strength").textContent=
+ getStrength(
+   Math.abs(
+     p.bigProbability-
+     p.smallProbability
+   ),
+   p.sample
+ );
+
+
+ $("predictionReason").innerHTML=
+ `Based on Last 20/50/100/200,
+ transitions, sequences, skip patterns,
+ frequency and recurrence.
+ <br>
+ Sample: <b>${p.sample}</b>`;
+
+
+ $("windows").innerHTML=
+
+ [20,50,100,200]
+ .map(w=>{
+
+   const a =
+   data.slice(-w);
+
+   if(!a.length)
+   return "";
+
+   const c =
+   countTypes(a);
+
+   return `
+   <span class="badge">
+   Last ${w}:
+   BIG ${c.bigPct}% •
+   SMALL ${c.smallPct}%
+   </span>
+   `;
+
+ })
+ .join("");
 
 }
 
-const wl=
-currentWL(
-predictionRecords
-);
 
-$("curWL").textContent=
-wl.type?
-wl.type+" × "+wl.len:
-"—";
+/* ================= END PART 2A ================= */
+  /* ================= RENDER PATTERNS ================= */
 
-$("curWL").className=
-"value "+
-(
-wl.type==="WIN"?
-"good":
-wl.type==="LOSS"?
-"bad":
-""
-);
+function formatList(list){
 
-renderPatterns();
+ if(!list || !list.length)
+ return "No repeated pattern found.";
 
-renderStreaks();
-
-renderHistory();
+ return list
+ .slice(0,6)
+ .map(x =>
+   `${x.number} = ${x.count}×`
+ )
+ .join(" • ");
 
 }
 
-function listText(list){
-
-if(!list.length)
-return "No repeated evidence.";
-
-return list
-.slice(0,5)
-.map(x=>
-`${x.n} (${x.v}×)`
-)
-.join(" • ");
-
-}
 
 function renderPatterns(){
 
-if(data.length<2){
+ if(data.length<2){
 
-$("oneStep").textContent=
-"Need at least 2 results.";
+   $("transition").textContent=
+   "Enter at least 2 results.";
 
-return;
+   $("twoPattern").textContent=
+   "Need more data.";
+
+   $("threePattern").textContent=
+   "Need more data.";
+
+   $("skipPattern").textContent=
+   "Need more data.";
+
+   return;
+
+ }
+
+
+ const arr =
+ data.slice(-200);
+
+ const last =
+ arr[arr.length-1];
+
+
+ /* 1 NUMBER → NEXT */
+
+ const one =
+ oneStep(arr,last);
+
+ $("transition").textContent=
+ formatList(one);
+
+
+ /* 2 NUMBERS → NEXT */
+
+ const two =
+ twoStep(arr);
+
+ $("twoPattern").textContent=
+ formatList(two);
+
+
+ /* 3 NUMBERS → NEXT */
+
+ const three =
+ threeStep(arr);
+
+ $("threePattern").textContent=
+ formatList(three);
+
+
+ /* SKIP */
+
+ const sk1 =
+ skipOne(arr);
+
+ const sk2 =
+ skipTwo(arr);
+
+ $("skipPattern").innerHTML=
+ `
+ <b>1-step:</b>
+ ${formatList(sk1)}
+ <br><br>
+ <b>2-step:</b>
+ ${formatList(sk2)}
+ `;
+
+
+ /* BIG / SMALL */
+
+ const bs =
+ bsSequence(arr);
+
+ $("bsPattern").innerHTML=
+ `
+ <span class="badge">
+ BB: ${bs.BB}
+ </span>
+
+ <span class="badge">
+ BS: ${bs.BS}
+ </span>
+
+ <span class="badge">
+ SB: ${bs.SB}
+ </span>
+
+ <span class="badge">
+ SS: ${bs.SS}
+ </span>
+ `;
+
+
+ /* GAP */
+
+ const gaps =
+ gapAnalysis(arr)
+ .sort(
+   (a,b)=>a.since-b.since
+ )
+ .slice(0,7);
+
+
+ $("gapPattern").innerHTML=
+ gaps.length ?
+
+ gaps.map(x=>
+
+ `
+ <span class="badge">
+ Number ${x.number}:
+ ${x.count}× •
+ Avg gap ${x.average.toFixed(1)} •
+ Since ${x.since}
+ </span>
+ `
+
+ ).join("")
+
+ :
+
+ "Not enough repeated numbers.";
+
+
+ /* HOT / COLD */
+
+ const freq =
+ numberFrequency(arr);
+
+ const ranking =
+ freq
+
+ .map(
+   (v,n)=>({
+     number:n,
+     count:v
+   })
+ )
+
+ .sort(
+   (a,b)=>b.count-a.count
+ );
+
+
+ const hot =
+ ranking.slice(0,3);
+
+ const cold =
+ ranking
+ .slice(-3)
+ .reverse();
+
+
+ $("hotCold").innerHTML=
+ `
+ <b>HOT:</b>
+ ${hot.map(
+   x=>`${x.number} (${x.count}×)`
+ ).join(", ")}
+
+ <br><br>
+
+ <b>COLD:</b>
+ ${cold.map(
+   x=>`${x.number} (${x.count}×)`
+ ).join(", ")}
+ `;
+
+
+ /* SUPPORTING SIGNALS */
+
+ const signals=[];
+
+ if(one.length)
+ signals.push("1-number transition");
+
+ if(two.length)
+ signals.push("2-number pattern");
+
+ if(three.length)
+ signals.push("3-number pattern");
+
+ if(sk1.length)
+ signals.push("1-step skip");
+
+ if(sk2.length)
+ signals.push("2-step skip");
+
+ if(gaps.length)
+ signals.push("gap recurrence");
+
+
+ $("support").innerHTML=
+ signals.length ?
+
+ signals.map(
+   x=>`
+   <span class="badge">
+   ${x}
+   </span>
+   `
+ ).join("")
+
+ :
+
+ "No supporting pattern yet.";
 
 }
 
-const arr=
-data.slice(-200);
 
-const last=
-arr[arr.length-1];
-
-$("oneStep").textContent=
-listText(
-transition(arr,last)
-);
-
-$("twoStep").textContent=
-listText(
-conditionalNext(arr,2)
-);
-
-$("threeStep").textContent=
-listText(
-conditionalNext(arr,3)
-);
-
-$("skip").innerHTML=
-`1-result skip:
-${listText(skipNext(arr,1))}
-<br>
-2-result skip:
-${listText(skipNext(arr,2))}`;
-
-const bt=
-bsTransition(arr);
-
-$("bsPatterns").innerHTML=
-Object.entries(bt)
-.map(([k,v])=>
-`<span class="badge">
-${k} → BIG ${v.BIG}× /
-SMALL ${v.SMALL}×
-</span>`
-)
-.join("");
-
-const gs=
-gapStats(arr)
-.sort((a,b)=>a.since-b.since)
-.slice(0,6);
-
-$("gap").innerHTML=
-gs.length?
-gs.map(x=>
-`<span class="badge">
-${x.n}: ${x.count}× • avg gap
-${x.avg.toFixed(1)} • since ${x.since}
-</span>`
-).join("")
-:
-"Need repeated numbers.";
-
-const freq=
-Array(10).fill(0);
-
-arr.forEach(n=>freq[n]++);
-
-const ranked=
-freq
-
-.map((v,n)=>({n,v}))
-
-.sort((a,b)=>b.v-a.v);
-
-$("hotcold").innerHTML=
-`Hot:
-${ranked.slice(0,3)
-.map(x=>x.n+" ("+x.v+"×)")
-.join(", ")}
-<br>
-Cold:
-${ranked.slice(-3)
-.reverse()
-.map(x=>x.n+" ("+x.v+"×)")
-.join(", ")}`;
-
-const sig=[];
-
-if(conditionalNext(arr,2).length)
-sig.push("2-number pattern");
-
-if(conditionalNext(arr,3).length)
-sig.push("3-number pattern");
-
-if(skipNext(arr,1).length)
-sig.push("1-skip pattern");
-
-if(skipNext(arr,2).length)
-sig.push("2-skip pattern");
-
-if(transition(arr,last).length)
-sig.push("1-step transition");
-
-$("signals").innerHTML=
-sig.map(s=>
-`<span class="badge">
-${s} found
-</span>`
-).join("")
-||
-"No supporting pattern yet.";
-
-}
+/* ================= RENDER STREAKS ================= */
 
 function renderStreaks(){
 
-const c=
-currentWL(
-predictionRecords
-);
+ const current =
+ currentStreak(
+   predictionRecords
+ );
 
-$("currentWL").textContent=
-c.type?
-c.type+" × "+c.len:
-"—";
 
-$("currentWL").className=
-"pred "+
-(
-c.type==="WIN"?
-"good":
-c.type==="LOSS"?
-"bad":
-""
-);
+ /* CURRENT */
 
-$("wlDetail").textContent=
-c.type?
-"Current Big/Small prediction streak. Each new result evaluates the previous prediction."
-:
-"Prediction streak starts after the first prediction is generated.";
+ if(!current.type){
 
-const r100=
-predictionRecords.slice(-100);
+   $("currentWL").textContent=
+   "—";
 
-const r200=
-predictionRecords.slice(-200);
+   $("wlDetail").textContent=
+   "No evaluated prediction yet.";
 
-const s100=
-maxStreak(r100);
+ }else{
 
-const s200=
-maxStreak(r200);
+   $("currentWL").textContent=
+   current.type+
+   " × "+
+   current.length;
 
-$("streak100").innerHTML=
-r100.length?
-`Max WIN:
-<b class="good">
-${s100.maxWin} ×
-</b>
-•
-Max LOSS:
-<b class="bad">
-${s100.maxLoss} ×
-</b>
-•
-Evaluated:
-${s100.total}`
-:
-"Need more evaluated predictions.";
+   $("currentWL").className=
+   "prediction-main "+
+   (
+     current.type==="WIN" ?
+     "good" :
+     "bad"
+   );
 
-$("streak200").innerHTML=
-r200.length?
-`Max WIN:
-<b class="good">
-${s200.maxWin} ×
-</b>
-•
-Max LOSS:
-<b class="bad">
-${s200.maxLoss} ×
-</b>
-•
-Evaluated:
-${s200.total}`
-:
-"Need more evaluated predictions.";
+   $("wlDetail").textContent=
+   `Current Big/Small prediction streak: ${current.length}`;
 
-if(r200.length){
+ }
 
-const wins=
-r200.filter(r=>r.bsWin).length;
 
-$("backtest").textContent=
-`Last 200 prediction records:
-Big/Small historical accuracy
-${pct(wins,r200.length).toFixed(1)}%
-(${wins}/${r200.length}).
-Historical only — not a guarantee.`;
+ /* LAST 100 */
 
-}else{
+ const r100 =
+ predictionRecords.slice(-100);
 
-$("backtest").textContent=
-"Need more evaluated predictions.";
+ const s100 =
+ maxWinLoss(r100);
+
+
+ if(r100.length){
+
+   $("max100").innerHTML=
+   `
+   <b class="good">
+   Max WIN: ${s100.maxWin} ×
+   </b>
+   <br>
+   <b class="bad">
+   Max LOSS: ${s100.maxLoss} ×
+   </b>
+   <br>
+   Evaluated predictions:
+   ${r100.length}
+   `;
+
+ }else{
+
+   $("max100").textContent=
+   "No evaluated predictions yet.";
+
+ }
+
+
+ /* LAST 200 */
+
+ const r200 =
+ predictionRecords.slice(-200);
+
+ const s200 =
+ maxWinLoss(r200);
+
+
+ if(r200.length){
+
+   $("max200").innerHTML=
+   `
+   <b class="good">
+   Max WIN: ${s200.maxWin} ×
+   </b>
+   <br>
+   <b class="bad">
+   Max LOSS: ${s200.maxLoss} ×
+   </b>
+   <br>
+   Evaluated predictions:
+   ${r200.length}
+   `;
+
+ }else{
+
+   $("max200").textContent=
+   "No evaluated predictions yet.";
+
+ }
+
+
+ /* BACKTEST */
+
+ if(r200.length){
+
+   const wins =
+   r200.filter(
+     x=>x.win
+   ).length;
+
+   const accuracy =
+   pct(
+     wins,
+     r200.length
+   );
+
+
+   $("backtest").innerHTML=
+   `
+   Last 200 prediction records:
+   <b>${accuracy}%</b>
+   Big/Small accuracy
+   (${wins}/${r200.length})
+   <br>
+   <span class="note">
+   Historical backtest only.
+   </span>
+   `;
+
+ }else{
+
+   $("backtest").textContent=
+   "Need evaluated predictions.";
+
+ }
 
 }
 
-}
+
+/* ================= RENDER HISTORY ================= */
 
 function renderHistory(){
 
-const h=
-data.slice(-100);
+ const recent =
+ data.slice(-100);
 
-$("historyList").innerHTML=
-h.map(n=>
-`<span class="pill">${n}</span>`
-).join("")
-||
-"No results.";
 
-$("fullHistory").textContent=
-data.length?
-data.join(" → "):
-"No results.";
+ $("historyList").innerHTML=
+ recent.length ?
+
+ recent.map(
+   n=>
+   `<span class="pill">${n}</span>`
+ ).join("")
+
+ :
+
+ `<span class="note">
+ No results yet.
+ </span>`;
+
+
+ $("fullHistory").textContent=
+ data.length ?
+
+ data.join(" → ")
+
+ :
+
+ "No results yet.";
 
 }
+
+
+/* ================= PREDICTION CARD ================= */
+
+function renderPredictionTracking(){
+
+ if(!predictionRecords.length){
+
+   $("prediction").textContent=
+   "Prediction tracking will appear after enough data.";
+
+   return;
+
+ }
+
+
+ const wins =
+ predictionRecords.filter(
+   x=>x.win
+ ).length;
+
+
+ const total =
+ predictionRecords.length;
+
+
+ const accuracy =
+ pct(wins,total);
+
+
+ const current =
+ currentStreak(
+   predictionRecords
+ );
+
+
+ $("prediction").innerHTML=
+ `
+ Big/Small accuracy:
+ <b>${accuracy}%</b>
+ (${wins}/${total})
+ <br>
+ Current:
+ ${
+   current.type==="WIN"
+   ?
+   `<span class="good">
+   WIN × ${current.length}
+   </span>`
+   :
+   `<span class="bad">
+   LOSS × ${current.length}
+   </span>`
+ }
+ `;
+
+}
+
+
+/* ================= MAIN RENDER ================= */
+
+function render(){
+
+ renderDashboard();
+
+ renderPatterns();
+
+ renderStreaks();
+
+ renderHistory();
+
+ renderPredictionTracking();
+
+}
+
+
+/* ================= START ================= */
 
 render();
 
