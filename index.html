@@ -213,6 +213,17 @@ button.action:active{
   gap:6px;
 }
 
+.streak-sequence{
+  background:#1d2128;
+  border:1px solid #30353d;
+  border-radius:12px;
+  padding:12px;
+  line-height:1.9;
+  word-break:break-all;
+  font-size:20px;
+  letter-spacing:2px;
+}
+
 .pill{
   background:#252b34;
   border:1px solid #363d47;
@@ -468,6 +479,23 @@ button.action:active{
       </div>
 
     </div>
+
+  </div>
+
+  <!-- WIN / LOSS SEQUENCE -->
+  <div class="card">
+
+    <h2>Win / Loss Sequence</h2>
+
+    <div class="muted" style="font-size:12px;margin-bottom:10px">
+      ✔️ = Win &nbsp;&nbsp; ✖️ = Loss • Showing latest 50 evaluated predictions
+    </div>
+
+    <div id="winLossSequence" class="streak-sequence">
+      No evaluated predictions yet.
+    </div>
+
+    <div id="winLossSequenceInfo" class="muted" style="font-size:12px;margin-top:10px"></div>
 
   </div>
 
@@ -1673,6 +1701,50 @@ function renderStreaks(){
 
 
 /* =========================================================
+   WIN / LOSS SEQUENCE RENDER
+========================================================= */
+
+function renderWinLossSequence(){
+
+  const el =
+    document.getElementById("winLossSequence");
+
+  const info =
+    document.getElementById("winLossSequenceInfo");
+
+  if(!predictionRecords.length){
+
+    el.textContent =
+      "No evaluated predictions yet.";
+
+    info.textContent = "";
+
+    return;
+
+  }
+
+  // Keep the display compact while preserving all underlying records.
+  const recent =
+    predictionRecords.slice(-50);
+
+  el.textContent =
+    recent
+      .map(r => r.win ? "✔️" : "✖️")
+      .join("");
+
+  const wins =
+    recent.filter(r => r.win).length;
+
+  const losses =
+    recent.length - wins;
+
+  info.textContent =
+    `Latest ${recent.length}: ${wins} Wins • ${losses} Losses`;
+
+}
+
+
+/* =========================================================
    FREQUENCY RENDER
 ========================================================= */
 
@@ -2116,6 +2188,8 @@ function render(){
 
   renderStreaks();
 
+  renderWinLossSequence();
+
   renderFrequency();
 
   renderPatternOne();
@@ -2139,6 +2213,112 @@ function render(){
 
 render();
 
+</script>
+
+
+<!-- Data Backup & Restore -->
+<div id="backupRestorePanel" style="margin:20px 0;padding:16px;border:1px solid #ddd;border-radius:12px;">
+  <h3 style="margin-top:0;">💾 Data Backup & Restore</h3>
+  <p style="margin:6px 0 12px;">Backup your current analyzer data before making future website changes.</p>
+  <button type="button" onclick="exportBackup()">⬇️ Export Backup</button>
+  <button type="button" onclick="document.getElementById('restoreBackupFile').click()">⬆️ Restore Backup</button>
+  <input id="restoreBackupFile" type="file" accept=".json,application/json" style="display:none" onchange="restoreBackup(event)">
+  <div id="backupStatus" style="margin-top:10px;font-size:14px;"></div>
+</div>
+
+<script>
+function exportBackup() {
+  try {
+    const backup = {
+      format: "Number Probability Analyzer Backup",
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      numberAnalyzerData: JSON.parse(localStorage.getItem("numberAnalyzerData") || "[]"),
+      predictionRecords: JSON.parse(localStorage.getItem("predictionRecords") || "[]")
+    };
+
+    const numbersCount = Array.isArray(backup.numberAnalyzerData)
+      ? backup.numberAnalyzerData.length : 0;
+
+    const blob = new Blob([JSON.stringify(backup, null, 2)], {
+      type: "application/json"
+    });
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    const date = new Date().toISOString().slice(0,10);
+    a.href = url;
+    a.download = "number-probability-analyzer-backup-" + date + ".json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+
+    const status = document.getElementById("backupStatus");
+    if (status) {
+      status.textContent = "✅ Backup exported: " + numbersCount + " number records.";
+    }
+  } catch (error) {
+    alert("Backup export failed: " + error.message);
+  }
+}
+
+function restoreBackup(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    try {
+      const backup = JSON.parse(e.target.result);
+
+      if (!backup || !Array.isArray(backup.numberAnalyzerData)) {
+        throw new Error("Invalid backup file.");
+      }
+
+      const numbersCount = backup.numberAnalyzerData.length;
+      const predictionCount = Array.isArray(backup.predictionRecords)
+        ? backup.predictionRecords.length : 0;
+
+      const ok = confirm(
+        "Restore this backup?\n\n" +
+        "Numbers: " + numbersCount + "\n" +
+        "Prediction records: " + predictionCount + "\n\n" +
+        "This will replace the CURRENT browser data with the backup."
+      );
+
+      if (!ok) {
+        event.target.value = "";
+        return;
+      }
+
+      // Only replace the two existing storage keys used by the analyzer.
+      localStorage.setItem(
+        "numberAnalyzerData",
+        JSON.stringify(backup.numberAnalyzerData)
+      );
+      localStorage.setItem(
+        "predictionRecords",
+        JSON.stringify(Array.isArray(backup.predictionRecords)
+          ? backup.predictionRecords : [])
+      );
+
+      alert(
+        "✅ Backup restored successfully.\n\n" +
+        numbersCount + " number records restored.\n" +
+        "The page will reload now."
+      );
+
+      location.reload();
+    } catch (error) {
+      alert("Restore failed: " + error.message);
+      event.target.value = "";
+    }
+  };
+
+  reader.readAsText(file);
+}
 </script>
 
 </body>
