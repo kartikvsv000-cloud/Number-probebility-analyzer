@@ -296,12 +296,14 @@ button.action:active{
 <div class="wrap">
 
   <h1>Number Probability Analyzer</h1>
+
   <div class="sub">
     0–4 = SMALL • 5–9 = BIG • Multi-pattern statistical analysis
   </div>
 
   <!-- DASHBOARD -->
   <div class="card">
+
     <h2>Dashboard</h2>
 
     <div class="grid">
@@ -327,7 +329,9 @@ button.action:active{
       </div>
 
     </div>
+
   </div>
+
 
   <!-- ENTER RESULT -->
   <div class="card">
@@ -379,11 +383,19 @@ button.action:active{
     </div>
 
     <div class="actions">
-      <button class="action" onclick="undo()">Undo</button>
-      <button class="action" onclick="clearAll()">Clear All</button>
+
+      <button class="action" onclick="undo()">
+        Undo
+      </button>
+
+      <button class="action" onclick="clearAll()">
+        Clear All
+      </button>
+
     </div>
 
   </div>
+
 
   <!-- PREDICTION -->
   <div class="card">
@@ -392,7 +404,9 @@ button.action:active{
 
     <div class="prediction">
 
-      <div class="label">BIG / SMALL</div>
+      <div class="label">
+        BIG / SMALL
+      </div>
 
       <div class="pred-main" id="predictionSide">
         Need Data
@@ -407,19 +421,44 @@ button.action:active{
       <div class="grid">
 
         <div class="stat">
-          <div class="label">Big Probability</div>
-          <div class="prob" id="bigProb">—</div>
-          <div class="bar">
-            <div class="fill" id="bigBar" style="width:0%"></div>
+
+          <div class="label">
+            Big Probability
           </div>
+
+          <div class="prob" id="bigProb">
+            —
+          </div>
+
+          <div class="bar">
+            <div
+              class="fill"
+              id="bigBar"
+              style="width:0%"
+            ></div>
+          </div>
+
         </div>
 
+
         <div class="stat">
-          <div class="label">Small Probability</div>
-          <div class="prob" id="smallProb">—</div>
-          <div class="bar">
-            <div class="fill" id="smallBar" style="width:0%"></div>
+
+          <div class="label">
+            Small Probability
           </div>
+
+          <div class="prob" id="smallProb">
+            —
+          </div>
+
+          <div class="bar">
+            <div
+              class="fill"
+              id="smallBar"
+              style="width:0%"
+            ></div>
+          </div>
+
         </div>
 
       </div>
@@ -429,27 +468,54 @@ button.action:active{
       <div class="grid">
 
         <div class="stat">
-          <div class="label">Likely Number 1</div>
-          <div class="value" id="likely1">—</div>
-          <div class="muted" id="likely1Prob"></div>
+
+          <div class="label">
+            Likely Number 1
+          </div>
+
+          <div class="value" id="likely1">
+            —
+          </div>
+
+          <div
+            class="muted"
+            id="likely1Prob"
+          ></div>
+
         </div>
 
+
         <div class="stat">
-          <div class="label">Likely Number 2</div>
-          <div class="value" id="likely2">—</div>
-          <div class="muted" id="likely2Prob"></div>
+
+          <div class="label">
+            Likely Number 2
+          </div>
+
+          <div class="value" id="likely2">
+            —
+          </div>
+
+          <div
+            class="muted"
+            id="likely2Prob"
+          ></div>
+
         </div>
 
       </div>
 
     </div>
 
-    <div class="notice" style="margin-top:12px">
+    <div
+      class="notice"
+      style="margin-top:12px"
+    >
       Probability is a statistical estimate from historical entered data.
       It cannot guarantee the next result.
     </div>
 
   </div>
+
 
   <!-- STREAKS -->
   <div class="card">
@@ -459,45 +525,196 @@ button.action:active{
     <div class="grid">
 
       <div class="stat">
-        <div class="label">Current Streak</div>
-        <div class="value" id="currentStreak">—</div>
+
+        <div class="label">
+          Current Streak
+        </div>
+
+        <div
+          class="value"
+          id="currentStreak"
+        >
+          —
+        </div>
+
       </div>
 
-      <div class="stat">
-        <div class="label">Current Type</div>
-        <div class="value" id="currentType">—</div>
-      </div>
 
       <div class="stat">
-        <div class="label">Max Win Streak</div>
-        <div class="value good" id="maxWin">0</div>
+
+        <div class="label">
+          Current Type
+        </div>
+
+        <div
+          class="value"
+          id="currentType"
+        >
+          —
+        </div>
+
       </div>
 
+
       <div class="stat">
-        <div class="label">Max Loss Streak</div>
-        <div class="value bad" id="maxLoss">0</div>
+
+        <div class="label">
+          Max Win Streak
+        </div>
+
+        <div
+          class="value good"
+          id="maxWin"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="label">
+          Max Loss Streak
+        </div>
+
+        <div
+          class="value bad"
+          id="maxLoss"
+        >
+          0
+        </div>
+
       </div>
 
     </div>
 
   </div>
+
 
   <!-- WIN / LOSS SEQUENCE -->
   <div class="card">
 
     <h2>Win / Loss Sequence</h2>
 
-    <div class="muted" style="font-size:12px;margin-bottom:10px">
-      ✔️ = Win &nbsp;&nbsp; ✖️ = Loss • Showing latest 50 evaluated predictions
+    <div
+      class="muted"
+      style="font-size:12px;margin-bottom:10px"
+    >
+      ✔️ = Win &nbsp;&nbsp;
+      ✖️ = Loss • Showing latest 50 evaluated predictions
     </div>
 
-    <div id="winLossSequence" class="streak-sequence">
+    <div
+      id="winLossSequence"
+      class="streak-sequence"
+    >
       No evaluated predictions yet.
     </div>
 
-    <div id="winLossSequenceInfo" class="muted" style="font-size:12px;margin-top:10px"></div>
+    <div
+      id="winLossSequenceInfo"
+      class="muted"
+      style="font-size:12px;margin-top:10px"
+    ></div>
 
   </div>
+
+
+  <!-- WIN / LOSS RATE -->
+  <div class="card">
+
+    <h2>Win / Loss Rate</h2>
+
+    <div class="grid">
+
+      <!-- RECENT 200 -->
+      <div class="stat">
+
+        <div class="label">
+          Recently — Last 200
+        </div>
+
+        <div
+          class="muted"
+          style="margin-top:8px"
+        >
+          Total:
+          <span id="recent200Total">0</span>
+          <br>
+
+          Wins:
+          <span id="recent200Wins">0</span>
+          <br>
+
+          Losses:
+          <span id="recent200Losses">0</span>
+        </div>
+
+        <div
+          class="good"
+          style="margin-top:8px"
+        >
+          Win Rate:
+          <span id="recent200WinRate">0%</span>
+        </div>
+
+        <div
+          class="bad"
+          style="margin-top:5px"
+        >
+          Loss Rate:
+          <span id="recent200LossRate">0%</span>
+        </div>
+
+      </div>
+
+
+      <!-- ALL TIME -->
+      <div class="stat">
+
+        <div class="label">
+          All Time
+        </div>
+
+        <div
+          class="muted"
+          style="margin-top:8px"
+        >
+          Total:
+          <span id="allTimeTotal">0</span>
+          <br>
+
+          Wins:
+          <span id="allTimeWins">0</span>
+          <br>
+
+          Losses:
+          <span id="allTimeLosses">0</span>
+        </div>
+
+        <div
+          class="good"
+          style="margin-top:8px"
+        >
+          Win Rate:
+          <span id="allTimeWinRate">0%</span>
+        </div>
+
+        <div
+          class="bad"
+          style="margin-top:5px"
+        >
+          Loss Rate:
+          <span id="allTimeLossRate">0%</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 
   <!-- WINDOW -->
   <div class="card">
@@ -506,36 +723,56 @@ button.action:active{
 
     <div class="tabs">
 
-      <button class="tab active" onclick="setWindow(20,this)">
+      <button
+        class="tab active"
+        onclick="setWindow(20,this)"
+      >
         Last 20
       </button>
 
-      <button class="tab" onclick="setWindow(50,this)">
+      <button
+        class="tab"
+        onclick="setWindow(50,this)"
+      >
         Last 50
       </button>
 
-      <button class="tab" onclick="setWindow(100,this)">
+      <button
+        class="tab"
+        onclick="setWindow(100,this)"
+      >
         Last 100
       </button>
 
-      <button class="tab" onclick="setWindow(200,this)">
+      <button
+        class="tab"
+        onclick="setWindow(200,this)"
+      >
         Last 200
       </button>
 
     </div>
 
-    <div id="windowInfo" class="muted"></div>
+    <div
+      id="windowInfo"
+      class="muted"
+    ></div>
 
   </div>
+
 
   <!-- NUMBER FREQUENCY -->
   <div class="card">
 
     <h2>Number Frequency</h2>
 
-    <div class="number-list" id="frequency"></div>
+    <div
+      class="number-list"
+      id="frequency"
+    ></div>
 
   </div>
+
 
   <!-- PATTERNS -->
   <div class="card">
@@ -562,6 +799,7 @@ button.action:active{
 
   </div>
 
+
   <!-- BIG SMALL -->
   <div class="card">
 
@@ -571,14 +809,19 @@ button.action:active{
 
   </div>
 
+
   <!-- HISTORY -->
   <div class="card">
 
     <h2>History — Last 200</h2>
 
-    <div class="history" id="history"></div>
+    <div
+      class="history"
+      id="history"
+    ></div>
 
   </div>
+
 
   <!-- INFORMATION -->
   <div class="card">
@@ -588,23 +831,27 @@ button.action:active{
     <div class="notice">
 
       <p>
-        <b>1.</b> Recent history is analyzed using multiple windows:
+        <b>1.</b>
+        Recent history is analyzed using multiple windows:
         20, 50, 100 and 200 results.
       </p>
 
       <p>
-        <b>2.</b> The system checks frequency, recent trend,
+        <b>2.</b>
+        The system checks frequency, recent trend,
         previous-number transitions, two-number sequences and
         skip-one patterns.
       </p>
 
       <p>
-        <b>3.</b> Big/Small probability combines these statistical
+        <b>3.</b>
+        Big/Small probability combines these statistical
         signals instead of relying on only one pattern.
       </p>
 
       <p>
-        <b>4.</b> Strength is shown as Strong, Medium or Weak
+        <b>4.</b>
+        Strength is shown as Strong, Medium or Weak
         depending on the difference between the two probabilities
         and the amount of available data.
       </p>
@@ -614,6 +861,7 @@ button.action:active{
   </div>
 
 </div>
+
 
 <script>
 
@@ -630,51 +878,120 @@ let predictionRecords = JSON.parse(
 );
 
 let selectedWindow = 20;
-  function getWinLossStats(records) {
-  const total = records.length;
-  const wins = records.filter(r => r.win === true).length;
-  const losses = total - wins;
+
+
+/* =========================================================
+   WIN / LOSS STATISTICS
+========================================================= */
+
+function getWinLossStats(records){
+
+  const total =
+    records.length;
+
+  const wins =
+    records.filter(
+      r => r.win === true
+    ).length;
+
+  const losses =
+    total - wins;
 
   return {
-    total,
-    wins,
-    losses,
-    winRate: total ? (wins / total * 100).toFixed(2) : "0.00",
-    lossRate: total ? (losses / total * 100).toFixed(2) : "0.00"
+
+    total: total,
+
+    wins: wins,
+
+    losses: losses,
+
+    winRate:
+      total
+        ? (wins / total * 100).toFixed(2)
+        : "0.00",
+
+    lossRate:
+      total
+        ? (losses / total * 100).toFixed(2)
+        : "0.00"
+
   };
+
 }
+
 
 function renderWinLossStats(){
 
   const recent200Stats =
-    getWinLossStats(predictionRecords.slice(-200));
+    getWinLossStats(
+      predictionRecords.slice(-200)
+    );
 
   const allTimeStats =
-    getWinLossStats(predictionRecords);
+    getWinLossStats(
+      predictionRecords
+    );
 
-  document.getElementById("recent200Wins").textContent =
+
+  document.getElementById(
+    "recent200Total"
+  ).textContent =
+    recent200Stats.total;
+
+
+  document.getElementById(
+    "recent200Wins"
+  ).textContent =
     recent200Stats.wins;
 
-  document.getElementById("recent200Losses").textContent =
+
+  document.getElementById(
+    "recent200Losses"
+  ).textContent =
     recent200Stats.losses;
 
-  document.getElementById("recent200WinRate").textContent =
+
+  document.getElementById(
+    "recent200WinRate"
+  ).textContent =
     recent200Stats.winRate + "%";
 
-  document.getElementById("recent200LossRate").textContent =
+
+  document.getElementById(
+    "recent200LossRate"
+  ).textContent =
     recent200Stats.lossRate + "%";
 
-  document.getElementById("allTimeWins").textContent =
+
+  document.getElementById(
+    "allTimeTotal"
+  ).textContent =
+    allTimeStats.total;
+
+
+  document.getElementById(
+    "allTimeWins"
+  ).textContent =
     allTimeStats.wins;
 
-  document.getElementById("allTimeLosses").textContent =
+
+  document.getElementById(
+    "allTimeLosses"
+  ).textContent =
     allTimeStats.losses;
 
-  document.getElementById("allTimeWinRate").textContent =
+
+  document.getElementById(
+    "allTimeWinRate"
+  ).textContent =
     allTimeStats.winRate + "%";
 
-  document.getElementById("allTimeLossRate").textContent =
+
+  document.getElementById(
+    "allTimeLossRate"
+  ).textContent =
     allTimeStats.lossRate + "%";
+
 }
 
 
@@ -703,7 +1020,9 @@ function saveData(){
 
 function side(n){
 
-  return n >= 5 ? "BIG" : "SMALL";
+  return n >= 5
+    ? "BIG"
+    : "SMALL";
 
 }
 
@@ -717,7 +1036,10 @@ function pct(n){
 
 function clamp(n,min,max){
 
-  return Math.max(min,Math.min(max,n));
+  return Math.max(
+    min,
+    Math.min(max,n)
+  );
 
 }
 
@@ -727,11 +1049,6 @@ function clamp(n,min,max){
 ========================================================= */
 
 function addResult(n){
-
-  /*
-    Before adding the new result, compare it with the
-    prediction made for this result.
-  */
 
   if(data.length > 0){
 
@@ -758,11 +1075,6 @@ function undo(){
 
   data.pop();
 
-  /*
-    Prediction records are based on previous predictions.
-    Rebuild them after undo.
-  */
-
   rebuildPredictionTracking();
 
   saveData();
@@ -778,7 +1090,13 @@ function undo(){
 
 function clearAll(){
 
-  if(!confirm("Clear all entered results?")) return;
+  if(
+    !confirm(
+      "Clear all entered results?"
+    )
+  ){
+    return;
+  }
 
   data = [];
 
@@ -801,7 +1119,9 @@ function setWindow(n,button){
 
   document
     .querySelectorAll(".tab")
-    .forEach(x => x.classList.remove("active"));
+    .forEach(
+      x => x.classList.remove("active")
+    );
 
   button.classList.add("active");
 
@@ -813,7 +1133,10 @@ function setWindow(n,button){
 function getWindowData(){
 
   return data.slice(
-    Math.max(0,data.length-selectedWindow)
+    Math.max(
+      0,
+      data.length-selectedWindow
+    )
   );
 
 }
@@ -825,9 +1148,12 @@ function getWindowData(){
 
 function getFrequency(arr){
 
-  const f = Array(10).fill(0);
+  const f =
+    Array(10).fill(0);
 
-  arr.forEach(n => f[n]++);
+  arr.forEach(
+    n => f[n]++
+  );
 
   return f;
 
@@ -841,16 +1167,27 @@ function getFrequency(arr){
 function getSideFrequency(arr){
 
   let big = 0;
+
   let small = 0;
 
   arr.forEach(n => {
 
-    if(n >= 5) big++;
-    else small++;
+    if(n >= 5){
+
+      big++;
+
+    }else{
+
+      small++;
+
+    }
 
   });
 
-  return {big,small};
+  return {
+    big,
+    small
+  };
 
 }
 
@@ -870,13 +1207,20 @@ function recentSideProbability(arr){
 
   }
 
-  const recent = arr.slice(-20);
+  const recent =
+    arr.slice(-20);
 
-  const s = getSideFrequency(recent);
+  const s =
+    getSideFrequency(recent);
 
   return {
-    big:s.big/recent.length,
-    small:s.small/recent.length
+
+    big:
+      s.big / recent.length,
+
+    small:
+      s.small / recent.length
+
   };
 
 }
@@ -892,14 +1236,22 @@ function transitionOne(arr){
 
   for(let i=0;i<10;i++){
 
-    map[i] = Array(10).fill(0);
+    map[i] =
+      Array(10).fill(0);
 
   }
 
-  for(let i=0;i<arr.length-1;i++){
+  for(
+    let i=0;
+    i<arr.length-1;
+    i++
+  ){
 
-    const a = arr[i];
-    const b = arr[i+1];
+    const a =
+      arr[i];
+
+    const b =
+      arr[i+1];
 
     map[a][b]++;
 
@@ -918,18 +1270,25 @@ function transitionTwo(arr){
 
   const map = {};
 
-  for(let i=0;i<arr.length-2;i++){
+  for(
+    let i=0;
+    i<arr.length-2;
+    i++
+  ){
 
     const key =
       arr[i] + "," + arr[i+1];
 
     if(!map[key]){
 
-      map[key] = Array(10).fill(0);
+      map[key] =
+        Array(10).fill(0);
 
     }
 
-    map[key][arr[i+2]]++;
+    map[key][
+      arr[i+2]
+    ]++;
 
   }
 
@@ -940,24 +1299,31 @@ function transitionTwo(arr){
 
 /* =========================================================
    SKIP ONE
-   A -> ? -> B
 ========================================================= */
 
 function skipTransition(arr){
 
   const map = {};
 
-  for(let i=0;i<arr.length-2;i++){
+  for(
+    let i=0;
+    i<arr.length-2;
+    i++
+  ){
 
-    const key = String(arr[i]);
+    const key =
+      String(arr[i]);
 
     if(!map[key]){
 
-      map[key] = Array(10).fill(0);
+      map[key] =
+        Array(10).fill(0);
 
     }
 
-    map[key][arr[i+2]]++;
+    map[key][
+      arr[i+2]
+    ]++;
 
   }
 
@@ -972,9 +1338,17 @@ function skipTransition(arr){
 
 function getTwoContext(arr){
 
-  if(arr.length < 2) return null;
+  if(
+    arr.length < 2
+  ){
+    return null;
+  }
 
-  return arr[arr.length-2] + "," + arr[arr.length-1];
+  return (
+    arr[arr.length-2] +
+    "," +
+    arr[arr.length-1]
+  );
 
 }
 
@@ -985,7 +1359,8 @@ function getTwoContext(arr){
 
 function patternNumberScores(arr){
 
-  const scores = Array(10).fill(0);
+  const scores =
+    Array(10).fill(0);
 
   if(arr.length === 0){
 
@@ -993,13 +1368,16 @@ function patternNumberScores(arr){
 
   }
 
-  /*
-    Frequency score
-  */
 
-  const freq = getFrequency(arr);
+  const freq =
+    getFrequency(arr);
 
-  for(let n=0;n<10;n++){
+
+  for(
+    let n=0;
+    n<10;
+    n++
+  ){
 
     scores[n] +=
       (freq[n]/arr.length) * 35;
@@ -1007,26 +1385,31 @@ function patternNumberScores(arr){
   }
 
 
-  /*
-    Last-number transition
-  */
-
   if(arr.length >= 2){
 
-    const one = transitionOne(arr);
+    const one =
+      transitionOne(arr);
 
-    const last = arr[arr.length-1];
+    const last =
+      arr[arr.length-1];
 
-    const row = one[last];
+    const row =
+      one[last];
 
-    const total = row.reduce(
-      (a,b)=>a+b,
-      0
-    );
+    const total =
+      row.reduce(
+        (a,b)=>a+b,
+        0
+      );
+
 
     if(total > 0){
 
-      for(let n=0;n<10;n++){
+      for(
+        let n=0;
+        n<10;
+        n++
+      ){
 
         scores[n] +=
           (row[n]/total) * 30;
@@ -1038,28 +1421,34 @@ function patternNumberScores(arr){
   }
 
 
-  /*
-    Two-number context
-  */
-
   if(arr.length >= 3){
 
-    const two = transitionTwo(arr);
+    const two =
+      transitionTwo(arr);
 
-    const key = getTwoContext(arr);
+    const key =
+      getTwoContext(arr);
+
 
     if(two[key]){
 
-      const row = two[key];
+      const row =
+        two[key];
 
-      const total = row.reduce(
-        (a,b)=>a+b,
-        0
-      );
+      const total =
+        row.reduce(
+          (a,b)=>a+b,
+          0
+        );
+
 
       if(total > 0){
 
-        for(let n=0;n<10;n++){
+        for(
+          let n=0;
+          n<10;
+          n++
+        ){
 
           scores[n] +=
             (row[n]/total) * 20;
@@ -1073,30 +1462,36 @@ function patternNumberScores(arr){
   }
 
 
-  /*
-    Skip-one context
-  */
-
   if(arr.length >= 3){
 
-    const skip = skipTransition(arr);
+    const skip =
+      skipTransition(arr);
 
-    const last = String(
-      arr[arr.length-3]
-    );
+    const last =
+      String(
+        arr[arr.length-3]
+      );
+
 
     if(skip[last]){
 
-      const row = skip[last];
+      const row =
+        skip[last];
 
-      const total = row.reduce(
-        (a,b)=>a+b,
-        0
-      );
+      const total =
+        row.reduce(
+          (a,b)=>a+b,
+          0
+        );
+
 
       if(total > 0){
 
-        for(let n=0;n<10;n++){
+        for(
+          let n=0;
+          n<10;
+          n++
+        ){
 
           scores[n] +=
             (row[n]/total) * 15;
@@ -1122,7 +1517,11 @@ function patternNumberScores(arr){
 function normalizeScores(scores){
 
   const total =
-    scores.reduce((a,b)=>a+b,0);
+    scores.reduce(
+      (a,b)=>a+b,
+      0
+    );
+
 
   if(total <= 0){
 
@@ -1131,6 +1530,7 @@ function normalizeScores(scores){
     );
 
   }
+
 
   return scores.map(
     x => x/total*100
@@ -1169,12 +1569,12 @@ function calculateSideProbability(arr){
     recentSideProbability(arr);
 
 
-  /*
-    Transition probability
-  */
+  let transitionBig =
+    .5;
 
-  let transitionBig = .5;
-  let transitionSmall = .5;
+  let transitionSmall =
+    .5;
+
 
   if(arr.length >= 2){
 
@@ -1188,13 +1588,21 @@ function calculateSideProbability(arr){
       one[last];
 
     const total =
-      row.reduce((a,b)=>a+b,0);
+      row.reduce(
+        (a,b)=>a+b,
+        0
+      );
+
 
     if(total > 0){
 
       let b = 0;
 
-      for(let n=5;n<=9;n++){
+      for(
+        let n=5;
+        n<=9;
+        n++
+      ){
 
         b += row[n];
 
@@ -1211,12 +1619,12 @@ function calculateSideProbability(arr){
   }
 
 
-  /*
-    Two-number pattern
-  */
+  let twoBig =
+    .5;
 
-  let twoBig = .5;
-  let twoSmall = .5;
+  let twoSmall =
+    .5;
+
 
   if(arr.length >= 3){
 
@@ -1226,26 +1634,38 @@ function calculateSideProbability(arr){
     const key =
       getTwoContext(arr);
 
+
     if(map[key]){
 
       const row =
         map[key];
 
       const total =
-        row.reduce((a,b)=>a+b,0);
+        row.reduce(
+          (a,b)=>a+b,
+          0
+        );
+
 
       if(total > 0){
 
-        let b=0;
+        let b = 0;
 
-        for(let n=5;n<=9;n++){
+        for(
+          let n=5;
+          n<=9;
+          n++
+        ){
 
           b += row[n];
 
         }
 
-        twoBig=b/total;
-        twoSmall=1-twoBig;
+        twoBig =
+          b/total;
+
+        twoSmall =
+          1-twoBig;
 
       }
 
@@ -1253,10 +1673,6 @@ function calculateSideProbability(arr){
 
   }
 
-
-  /*
-    Weighted combination
-  */
 
   let big =
       overallBig * .30
@@ -1272,7 +1688,9 @@ function calculateSideProbability(arr){
     + twoSmall * .20;
 
 
-  const total = big+small;
+  const total =
+    big + small;
+
 
   big =
     big/total*100;
@@ -1293,7 +1711,11 @@ function calculateSideProbability(arr){
    STRENGTH
 ========================================================= */
 
-function getStrength(big,small,count){
+function getStrength(
+  big,
+  small,
+  count
+){
 
   if(count < 20){
 
@@ -1304,17 +1726,20 @@ function getStrength(big,small,count){
   const diff =
     Math.abs(big-small);
 
+
   if(diff >= 18){
 
     return "STRONG";
 
   }
 
+
   if(diff >= 8){
 
     return "MEDIUM";
 
   }
+
 
   return "WEAK";
 
@@ -1329,18 +1754,27 @@ function getPrediction(){
 
   const arr =
     data.slice(
-      Math.max(0,data.length-200)
+      Math.max(
+        0,
+        data.length-200
+      )
     );
 
 
   if(arr.length < 10){
 
     return {
+
       side:null,
+
       big:50,
+
       small:50,
+
       strength:"NO DATA",
+
       numbers:[]
+
     };
 
   }
@@ -1349,10 +1783,8 @@ function getPrediction(){
   const sideProb =
     calculateSideProbability(arr);
 
-
   const scores =
     patternNumberScores(arr);
-
 
   const numberProb =
     normalizeScores(scores);
@@ -1360,8 +1792,15 @@ function getPrediction(){
 
   const ranked =
     numberProb
-      .map((p,n)=>({n,p}))
-      .sort((a,b)=>b.p-a.p);
+      .map(
+        (p,n)=>({
+          n,
+          p
+        })
+      )
+      .sort(
+        (a,b)=>b.p-a.p
+      );
 
 
   return {
@@ -1401,7 +1840,12 @@ function evaluatePreviousPrediction(actual){
   const p =
     getPrediction();
 
-  if(!p.side) return;
+
+  if(!p.side){
+
+    return;
+
+  }
 
 
   const actualSide =
@@ -1414,28 +1858,37 @@ function evaluatePreviousPrediction(actual){
 
   predictionRecords.push({
 
-    predicted:p.side,
-    actual:actualSide,
-    win:win,
+    predicted:
+      p.side,
+
+    actual:
+      actualSide,
+
+    win:
+      win,
+
     number1:
       p.numbers[0]
         ? p.numbers[0].n
         : null,
+
     number2:
       p.numbers[1]
         ? p.numbers[1].n
         : null,
-    actualNumber:actual,
-    time:Date.now()
+
+    actualNumber:
+      actual,
+
+    time:
+      Date.now()
 
   });
 
 
-  /*
-    Keep enough history for streak analysis.
-  */
-
-  if(predictionRecords.length > 1000){
+  if(
+    predictionRecords.length > 1000
+  ){
 
     predictionRecords =
       predictionRecords.slice(-1000);
@@ -1451,14 +1904,14 @@ function evaluatePreviousPrediction(actual){
 
 function rebuildPredictionTracking(){
 
-  predictionRecords=[];
+  predictionRecords = [];
 
-  /*
-    Re-run predictions sequentially
-    without changing original data.
-  */
 
-  for(let i=1;i<data.length;i++){
+  for(
+    let i=1;
+    i<data.length;
+    i++
+  ){
 
     const history =
       data.slice(0,i);
@@ -1466,14 +1919,24 @@ function rebuildPredictionTracking(){
     const saved =
       data;
 
-    data = history;
+    data =
+      history;
+
 
     const p =
       getPrediction();
 
-    data = saved;
 
-    if(!p.side) continue;
+    data =
+      saved;
+
+
+    if(!p.side){
+
+      continue;
+
+    }
+
 
     const actual =
       saved[i];
@@ -1481,13 +1944,17 @@ function rebuildPredictionTracking(){
     const actualSide =
       side(actual);
 
+
     predictionRecords.push({
 
-      predicted:p.side,
+      predicted:
+        p.side,
 
-      actual:actualSide,
+      actual:
+        actualSide,
 
-      win:p.side===actualSide,
+      win:
+        p.side === actualSide,
 
       number1:
         p.numbers[0]
@@ -1499,9 +1966,11 @@ function rebuildPredictionTracking(){
           ? p.numbers[1].n
           : null,
 
-      actualNumber:actual,
+      actualNumber:
+        actual,
 
-      time:Date.now()
+      time:
+        Date.now()
 
     });
 
@@ -1516,26 +1985,42 @@ function rebuildPredictionTracking(){
 
 function getStreaks(){
 
-  let currentType = null;
-  let current = 0;
+  let currentType =
+    null;
 
-  let maxWin = 0;
-  let maxLoss = 0;
+  let current =
+    0;
 
-  for(const r of predictionRecords){
+  let maxWin =
+    0;
+
+  let maxLoss =
+    0;
+
+
+  for(
+    const r of predictionRecords
+  ){
 
     const type =
-      r.win ? "WIN" : "LOSS";
+      r.win
+        ? "WIN"
+        : "LOSS";
 
 
-    if(type === currentType){
+    if(
+      type === currentType
+    ){
 
       current++;
 
     }else{
 
-      currentType = type;
-      current = 1;
+      currentType =
+        type;
+
+      current =
+        1;
 
     }
 
@@ -1543,12 +2028,18 @@ function getStreaks(){
     if(type === "WIN"){
 
       maxWin =
-        Math.max(maxWin,current);
+        Math.max(
+          maxWin,
+          current
+        );
 
     }else{
 
       maxLoss =
-        Math.max(maxLoss,current);
+        Math.max(
+          maxLoss,
+          current
+        );
 
     }
 
@@ -1557,11 +2048,17 @@ function getStreaks(){
 
   return {
 
-    type:currentType,
-    current:current,
+    type:
+      currentType,
 
-    maxWin:maxWin,
-    maxLoss:maxLoss
+    current:
+      current,
+
+    maxWin:
+      maxWin,
+
+    maxLoss:
+      maxLoss
 
   };
 
@@ -1581,20 +2078,30 @@ function renderDashboard(){
     getSideFrequency(data);
 
 
-  document.getElementById("total")
-    .textContent = total;
+  document.getElementById(
+    "total"
+  ).textContent =
+    total;
 
-  document.getElementById("smallCount")
-    .textContent = sides.small;
 
-  document.getElementById("bigCount")
-    .textContent = sides.big;
+  document.getElementById(
+    "smallCount"
+  ).textContent =
+    sides.small;
 
-  document.getElementById("latest")
-    .textContent =
-      total
-        ? data[total-1]
-        : "—";
+
+  document.getElementById(
+    "bigCount"
+  ).textContent =
+    sides.big;
+
+
+  document.getElementById(
+    "latest"
+  ).textContent =
+    total
+      ? data[total-1]
+      : "—";
 
 }
 
@@ -1613,27 +2120,63 @@ function renderPrediction(){
 
     document.getElementById(
       "predictionSide"
-    ).textContent="Need Data";
+    ).textContent =
+      "Need Data";
+
 
     document.getElementById(
       "strength"
-    ).textContent="NO DATA";
+    ).textContent =
+      "NO DATA";
+
 
     document.getElementById(
       "bigProb"
-    ).textContent="—";
+    ).textContent =
+      "—";
+
 
     document.getElementById(
       "smallProb"
-    ).textContent="—";
+    ).textContent =
+      "—";
+
 
     document.getElementById(
       "likely1"
-    ).textContent="—";
+    ).textContent =
+      "—";
+
 
     document.getElementById(
       "likely2"
-    ).textContent="—";
+    ).textContent =
+      "—";
+
+
+    document.getElementById(
+      "likely1Prob"
+    ).textContent =
+      "";
+
+
+    document.getElementById(
+      "likely2Prob"
+    ).textContent =
+      "";
+
+
+    document.getElementById(
+      "bigBar"
+    ).style.width =
+      "0%";
+
+
+    document.getElementById(
+      "smallBar"
+    ).style.width =
+      "0%";
+
 
     return;
 
@@ -1642,49 +2185,62 @@ function renderPrediction(){
 
   document.getElementById(
     "predictionSide"
-  ).textContent=p.side;
+  ).textContent =
+    p.side;
 
 
   document.getElementById(
     "strength"
-  ).textContent=p.strength;
+  ).textContent =
+    p.strength;
 
 
   document.getElementById(
     "bigProb"
-  ).textContent=
-    Math.round(p.big)+"%";
+  ).textContent =
+    Math.round(p.big) + "%";
 
 
   document.getElementById(
     "smallProb"
-  ).textContent=
-    Math.round(p.small)+"%";
+  ).textContent =
+    Math.round(p.small) + "%";
 
 
   document.getElementById(
     "bigBar"
-  ).style.width=
-    clamp(p.big,0,100)+"%";
+  ).style.width =
+    clamp(
+      p.big,
+      0,
+      100
+    ) + "%";
 
 
   document.getElementById(
     "smallBar"
-  ).style.width=
-    clamp(p.small,0,100)+"%";
+  ).style.width =
+    clamp(
+      p.small,
+      0,
+      100
+    ) + "%";
 
 
   if(p.numbers[0]){
 
     document.getElementById(
       "likely1"
-    ).textContent=
+    ).textContent =
       p.numbers[0].n;
+
 
     document.getElementById(
       "likely1Prob"
-    ).textContent=
-      Math.round(p.numbers[0].p)+"% score";
+    ).textContent =
+      Math.round(
+        p.numbers[0].p
+      ) + "% score";
 
   }
 
@@ -1693,13 +2249,16 @@ function renderPrediction(){
 
     document.getElementById(
       "likely2"
-    ).textContent=
+    ).textContent =
       p.numbers[1].n;
+
 
     document.getElementById(
       "likely2Prob"
-    ).textContent=
-      Math.round(p.numbers[1].p)+"% score";
+    ).textContent =
+      Math.round(
+        p.numbers[1].p
+      ) + "% score";
 
   }
 
@@ -1734,55 +2293,73 @@ function renderStreaks(){
 
   document.getElementById(
     "maxWin"
-  ).textContent=
+  ).textContent =
     s.maxWin;
 
 
   document.getElementById(
     "maxLoss"
-  ).textContent=
+  ).textContent =
     s.maxLoss;
 
 }
 
 
 /* =========================================================
-   WIN / LOSS SEQUENCE RENDER
+   WIN / LOSS SEQUENCE
 ========================================================= */
 
 function renderWinLossSequence(){
 
   const el =
-    document.getElementById("winLossSequence");
+    document.getElementById(
+      "winLossSequence"
+    );
 
   const info =
-    document.getElementById("winLossSequenceInfo");
+    document.getElementById(
+      "winLossSequenceInfo"
+    );
 
-  if(!predictionRecords.length){
+
+  if(
+    !predictionRecords.length
+  ){
 
     el.textContent =
       "No evaluated predictions yet.";
 
-    info.textContent = "";
+    info.textContent =
+      "";
 
     return;
 
   }
 
-  // Keep the display compact while preserving all underlying records.
+
   const recent =
     predictionRecords.slice(-50);
 
+
   el.textContent =
     recent
-      .map(r => r.win ? "✔️" : "✖️")
+      .map(
+        r => r.win
+          ? "✔️"
+          : "✖️"
+      )
       .join("");
 
+
   const wins =
-    recent.filter(r => r.win).length;
+    recent.filter(
+      r => r.win
+    ).length;
+
 
   const losses =
-    recent.length - wins;
+    recent.length-wins;
+
 
   info.textContent =
     `Latest ${recent.length}: ${wins} Wins • ${losses} Losses`;
@@ -1803,10 +2380,15 @@ function renderFrequency(){
     getFrequency(arr);
 
 
-  let html="";
+  let html =
+    "";
 
 
-  for(let n=0;n<10;n++){
+  for(
+    let n=0;
+    n<10;
+    n++
+  ){
 
     const percentage =
       arr.length
@@ -1820,14 +2402,17 @@ function renderFrequency(){
 
         <div>
           <b>${n}</b>
+
           <span class="muted">
             • ${side(n)}
           </span>
         </div>
 
         <div style="margin-top:5px">
+
           ${f[n]} times
           • ${Math.round(percentage)}%
+
         </div>
 
       </div>
@@ -1839,7 +2424,8 @@ function renderFrequency(){
 
   document.getElementById(
     "frequency"
-  ).innerHTML=html;
+  ).innerHTML =
+    html;
 
 }
 
@@ -1857,11 +2443,13 @@ function renderBigSmall(){
     getSideFrequency(arr);
 
 
-  if(arr.length===0){
+  if(
+    arr.length === 0
+  ){
 
     document.getElementById(
       "bigSmallStats"
-    ).innerHTML=
+    ).innerHTML =
       `<div class="muted">No data yet.</div>`;
 
     return;
@@ -1878,16 +2466,28 @@ function renderBigSmall(){
 
   document.getElementById(
     "bigSmallStats"
-  ).innerHTML=`
+  ).innerHTML = `
 
     <div class="row">
+
       <span>BIG</span>
-      <b>${s.big} (${Math.round(big)}%)</b>
+
+      <b>
+        ${s.big}
+        (${Math.round(big)}%)
+      </b>
+
     </div>
 
     <div class="row">
+
       <span>SMALL</span>
-      <b>${s.small} (${Math.round(small)}%)</b>
+
+      <b>
+        ${s.small}
+        (${Math.round(small)}%)
+      </b>
+
     </div>
 
   `;
@@ -1904,11 +2504,14 @@ function renderPatternOne(){
   const arr =
     getWindowData();
 
-  if(arr.length < 2){
+
+  if(
+    arr.length < 2
+  ){
 
     document.getElementById(
       "patternOne"
-    ).innerHTML=
+    ).innerHTML =
       `<div class="muted">
         Need more data.
       </div>`;
@@ -1928,14 +2531,19 @@ function renderPatternOne(){
     map[last];
 
   const total =
-    row.reduce((a,b)=>a+b,0);
+    row.reduce(
+      (a,b)=>a+b,
+      0
+    );
 
 
-  if(total===0){
+  if(
+    total === 0
+  ){
 
     document.getElementById(
       "patternOne"
-    ).innerHTML=
+    ).innerHTML =
       `<div class="muted">
         No repeated transition yet.
       </div>`;
@@ -1947,16 +2555,26 @@ function renderPatternOne(){
 
   const ranked =
     row
-      .map((count,n)=>({n,count}))
-      .filter(x=>x.count>0)
-      .sort((a,b)=>b.count-a.count)
+      .map(
+        (count,n)=>({
+          n,
+          count
+        })
+      )
+      .filter(
+        x => x.count > 0
+      )
+      .sort(
+        (a,b)=>b.count-a.count
+      )
       .slice(0,5);
 
 
-  let html="";
+  let html =
+    "";
 
 
-  ranked.forEach(x=>{
+  ranked.forEach(x => {
 
     html += `
 
@@ -1967,7 +2585,9 @@ function renderPatternOne(){
         <b>${x.n}</b>
 
         <span class="muted">
-          (${Math.round(x.count/total*100)}%)
+          (${Math.round(
+            x.count/total*100
+          )}%)
         </span>
 
       </div>
@@ -1979,7 +2599,8 @@ function renderPatternOne(){
 
   document.getElementById(
     "patternOne"
-  ).innerHTML=html;
+  ).innerHTML =
+    html;
 
 }
 
@@ -1993,11 +2614,14 @@ function renderPatternTwo(){
   const arr =
     getWindowData();
 
-  if(arr.length < 3){
+
+  if(
+    arr.length < 3
+  ){
 
     document.getElementById(
       "patternTwo"
-    ).innerHTML=
+    ).innerHTML =
       `<div class="muted">
         Need at least 3 results.
       </div>`;
@@ -2021,7 +2645,7 @@ function renderPatternTwo(){
 
     document.getElementById(
       "patternTwo"
-    ).innerHTML=
+    ).innerHTML =
       `<div class="muted">
         This 2-number sequence has not repeated yet.
       </div>`;
@@ -2032,21 +2656,34 @@ function renderPatternTwo(){
 
 
   const total =
-    row.reduce((a,b)=>a+b,0);
+    row.reduce(
+      (a,b)=>a+b,
+      0
+    );
 
 
   const ranked =
     row
-      .map((count,n)=>({n,count}))
-      .filter(x=>x.count>0)
-      .sort((a,b)=>b.count-a.count)
+      .map(
+        (count,n)=>({
+          n,
+          count
+        })
+      )
+      .filter(
+        x => x.count > 0
+      )
+      .sort(
+        (a,b)=>b.count-a.count
+      )
       .slice(0,5);
 
 
-  let html="";
+  let html =
+    "";
 
 
-  ranked.forEach(x=>{
+  ranked.forEach(x => {
 
     html += `
 
@@ -2057,7 +2694,9 @@ function renderPatternTwo(){
         <b>${x.n}</b>
 
         <span class="muted">
-          (${Math.round(x.count/total*100)}%)
+          (${Math.round(
+            x.count/total*100
+          )}%)
         </span>
 
       </div>
@@ -2069,7 +2708,8 @@ function renderPatternTwo(){
 
   document.getElementById(
     "patternTwo"
-  ).innerHTML=html;
+  ).innerHTML =
+    html;
 
 }
 
@@ -2083,11 +2723,14 @@ function renderSkipPattern(){
   const arr =
     getWindowData();
 
-  if(arr.length < 3){
+
+  if(
+    arr.length < 3
+  ){
 
     document.getElementById(
       "skipPattern"
-    ).innerHTML=
+    ).innerHTML =
       `<div class="muted">
         Need at least 3 results.
       </div>`;
@@ -2102,7 +2745,10 @@ function renderSkipPattern(){
 
 
   const key =
-    String(arr[arr.length-3]);
+    String(
+      arr[arr.length-3]
+    );
+
 
   const row =
     map[key];
@@ -2112,7 +2758,7 @@ function renderSkipPattern(){
 
     document.getElementById(
       "skipPattern"
-    ).innerHTML=
+    ).innerHTML =
       `<div class="muted">
         No skip-one pattern yet.
       </div>`;
@@ -2123,21 +2769,34 @@ function renderSkipPattern(){
 
 
   const total =
-    row.reduce((a,b)=>a+b,0);
+    row.reduce(
+      (a,b)=>a+b,
+      0
+    );
 
 
   const ranked =
     row
-      .map((count,n)=>({n,count}))
-      .filter(x=>x.count>0)
-      .sort((a,b)=>b.count-a.count)
+      .map(
+        (count,n)=>({
+          n,
+          count
+        })
+      )
+      .filter(
+        x => x.count > 0
+      )
+      .sort(
+        (a,b)=>b.count-a.count
+      )
       .slice(0,5);
 
 
-  let html="";
+  let html =
+    "";
 
 
-  ranked.forEach(x=>{
+  ranked.forEach(x => {
 
     html += `
 
@@ -2150,7 +2809,9 @@ function renderSkipPattern(){
         <b>${x.n}</b>
 
         <span class="muted">
-          (${Math.round(x.count/total*100)}%)
+          (${Math.round(
+            x.count/total*100
+          )}%)
         </span>
 
       </div>
@@ -2162,7 +2823,8 @@ function renderSkipPattern(){
 
   document.getElementById(
     "skipPattern"
-  ).innerHTML=html;
+  ).innerHTML =
+    html;
 
 }
 
@@ -2177,11 +2839,13 @@ function renderHistory(){
     data.slice(-200).reverse();
 
 
-  if(recent.length===0){
+  if(
+    recent.length === 0
+  ){
 
     document.getElementById(
       "history"
-    ).innerHTML=
+    ).innerHTML =
       `<span class="muted">
         No results yet.
       </span>`;
@@ -2195,8 +2859,9 @@ function renderHistory(){
     "history"
   ).innerHTML =
     recent
-      .map(n=>
-        `<span class="pill">${n}</span>`
+      .map(
+        n =>
+          `<span class="pill">${n}</span>`
       )
       .join("");
 
@@ -2236,6 +2901,8 @@ function render(){
 
   renderWinLossSequence();
 
+  renderWinLossStats();
+
   renderFrequency();
 
   renderPatternOne();
@@ -2262,109 +2929,310 @@ render();
 </script>
 
 
-<!-- Data Backup & Restore -->
-<div id="backupRestorePanel" style="margin:20px 0;padding:16px;border:1px solid #ddd;border-radius:12px;">
-  <h3 style="margin-top:0;">💾 Data Backup & Restore</h3>
-  <p style="margin:6px 0 12px;">Backup your current analyzer data before making future website changes.</p>
-  <button type="button" onclick="exportBackup()">⬇️ Export Backup</button>
-  <button type="button" onclick="document.getElementById('restoreBackupFile').click()">⬆️ Restore Backup</button>
-  <input id="restoreBackupFile" type="file" accept=".json,application/json" style="display:none" onchange="restoreBackup(event)">
-  <div id="backupStatus" style="margin-top:10px;font-size:14px;"></div>
+<!-- DATA BACKUP & RESTORE -->
+
+<div
+  id="backupRestorePanel"
+  style="
+    margin:20px 0;
+    padding:16px;
+    border:1px solid #ddd;
+    border-radius:12px;
+  "
+>
+
+  <h3 style="margin-top:0;">
+    💾 Data Backup & Restore
+  </h3>
+
+  <p style="margin:6px 0 12px;">
+    Backup your current analyzer data before making future website changes.
+  </p>
+
+  <button
+    type="button"
+    onclick="exportBackup()"
+  >
+    ⬇️ Export Backup
+  </button>
+
+  <button
+    type="button"
+    onclick="document.getElementById('restoreBackupFile').click()"
+  >
+    ⬆️ Restore Backup
+  </button>
+
+  <input
+    id="restoreBackupFile"
+    type="file"
+    accept=".json,application/json"
+    style="display:none"
+    onchange="restoreBackup(event)"
+  >
+
+  <div
+    id="backupStatus"
+    style="margin-top:10px;font-size:14px;"
+  ></div>
+
 </div>
 
+
 <script>
-function exportBackup() {
-  try {
+
+function exportBackup(){
+
+  try{
+
     const backup = {
-      format: "Number Probability Analyzer Backup",
-      version: 1,
-      exportedAt: new Date().toISOString(),
-      numberAnalyzerData: JSON.parse(localStorage.getItem("numberAnalyzerData") || "[]"),
-      predictionRecords: JSON.parse(localStorage.getItem("predictionRecords") || "[]")
+
+      format:
+        "Number Probability Analyzer Backup",
+
+      version:
+        1,
+
+      exportedAt:
+        new Date().toISOString(),
+
+      numberAnalyzerData:
+        JSON.parse(
+          localStorage.getItem(
+            "numberAnalyzerData"
+          ) || "[]"
+        ),
+
+      predictionRecords:
+        JSON.parse(
+          localStorage.getItem(
+            "predictionRecords"
+          ) || "[]"
+        )
+
     };
 
-    const numbersCount = Array.isArray(backup.numberAnalyzerData)
-      ? backup.numberAnalyzerData.length : 0;
 
-    const blob = new Blob([JSON.stringify(backup, null, 2)], {
-      type: "application/json"
-    });
+    const numbersCount =
+      Array.isArray(
+        backup.numberAnalyzerData
+      )
+        ? backup.numberAnalyzerData.length
+        : 0;
 
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    const date = new Date().toISOString().slice(0,10);
-    a.href = url;
-    a.download = "number-probability-analyzer-backup-" + date + ".json";
+
+    const blob =
+      new Blob(
+        [
+          JSON.stringify(
+            backup,
+            null,
+            2
+          )
+        ],
+        {
+          type:
+            "application/json"
+        }
+      );
+
+
+    const url =
+      URL.createObjectURL(blob);
+
+
+    const a =
+      document.createElement("a");
+
+
+    const date =
+      new Date()
+        .toISOString()
+        .slice(0,10);
+
+
+    a.href =
+      url;
+
+
+    a.download =
+      "number-probability-analyzer-backup-" +
+      date +
+      ".json";
+
+
     document.body.appendChild(a);
+
     a.click();
+
     a.remove();
+
     URL.revokeObjectURL(url);
 
-    const status = document.getElementById("backupStatus");
-    if (status) {
-      status.textContent = "✅ Backup exported: " + numbersCount + " number records.";
+
+    const status =
+      document.getElementById(
+        "backupStatus"
+      );
+
+
+    if(status){
+
+      status.textContent =
+        "✅ Backup exported: " +
+        numbersCount +
+        " number records.";
+
     }
-  } catch (error) {
-    alert("Backup export failed: " + error.message);
+
+  }catch(error){
+
+    alert(
+      "Backup export failed: " +
+      error.message
+    );
+
   }
+
 }
 
-function restoreBackup(event) {
-  const file = event.target.files && event.target.files[0];
-  if (!file) return;
 
-  const reader = new FileReader();
+function restoreBackup(event){
 
-  reader.onload = function(e) {
-    try {
-      const backup = JSON.parse(e.target.result);
+  const file =
+    event.target.files &&
+    event.target.files[0];
 
-      if (!backup || !Array.isArray(backup.numberAnalyzerData)) {
-        throw new Error("Invalid backup file.");
+
+  if(!file){
+
+    return;
+
+  }
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload =
+    function(e){
+
+      try{
+
+        const backup =
+          JSON.parse(
+            e.target.result
+          );
+
+
+        if(
+          !backup ||
+          !Array.isArray(
+            backup.numberAnalyzerData
+          )
+        ){
+
+          throw new Error(
+            "Invalid backup file."
+          );
+
+        }
+
+
+        const numbersCount =
+          backup.numberAnalyzerData.length;
+
+
+        const predictionCount =
+          Array.isArray(
+            backup.predictionRecords
+          )
+            ? backup.predictionRecords.length
+            : 0;
+
+
+        const ok =
+          confirm(
+
+            "Restore this backup?\n\n" +
+
+            "Numbers: " +
+            numbersCount +
+            "\n" +
+
+            "Prediction records: " +
+            predictionCount +
+            "\n\n" +
+
+            "This will replace the CURRENT browser data with the backup."
+
+          );
+
+
+        if(!ok){
+
+          event.target.value =
+            "";
+
+          return;
+
+        }
+
+
+        localStorage.setItem(
+          "numberAnalyzerData",
+          JSON.stringify(
+            backup.numberAnalyzerData
+          )
+        );
+
+
+        localStorage.setItem(
+          "predictionRecords",
+          JSON.stringify(
+            Array.isArray(
+              backup.predictionRecords
+            )
+              ? backup.predictionRecords
+              : []
+          )
+        );
+
+
+        alert(
+
+          "✅ Backup restored successfully.\n\n" +
+
+          numbersCount +
+          " number records restored.\n" +
+
+          "The page will reload now."
+
+        );
+
+
+        location.reload();
+
+      }catch(error){
+
+        alert(
+          "Restore failed: " +
+          error.message
+        );
+
+        event.target.value =
+          "";
+
       }
 
-      const numbersCount = backup.numberAnalyzerData.length;
-      const predictionCount = Array.isArray(backup.predictionRecords)
-        ? backup.predictionRecords.length : 0;
+    };
 
-      const ok = confirm(
-        "Restore this backup?\n\n" +
-        "Numbers: " + numbersCount + "\n" +
-        "Prediction records: " + predictionCount + "\n\n" +
-        "This will replace the CURRENT browser data with the backup."
-      );
-
-      if (!ok) {
-        event.target.value = "";
-        return;
-      }
-
-      // Only replace the two existing storage keys used by the analyzer.
-      localStorage.setItem(
-        "numberAnalyzerData",
-        JSON.stringify(backup.numberAnalyzerData)
-      );
-      localStorage.setItem(
-        "predictionRecords",
-        JSON.stringify(Array.isArray(backup.predictionRecords)
-          ? backup.predictionRecords : [])
-      );
-
-      alert(
-        "✅ Backup restored successfully.\n\n" +
-        numbersCount + " number records restored.\n" +
-        "The page will reload now."
-      );
-
-      location.reload();
-    } catch (error) {
-      alert("Restore failed: " + error.message);
-      event.target.value = "";
-    }
-  };
 
   reader.readAsText(file);
+
 }
+
 </script>
 
 </body>
