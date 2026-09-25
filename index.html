@@ -630,6 +630,52 @@ let predictionRecords = JSON.parse(
 );
 
 let selectedWindow = 20;
+  function getWinLossStats(records) {
+  const total = records.length;
+  const wins = records.filter(r => r.win === true).length;
+  const losses = total - wins;
+
+  return {
+    total,
+    wins,
+    losses,
+    winRate: total ? (wins / total * 100).toFixed(2) : "0.00",
+    lossRate: total ? (losses / total * 100).toFixed(2) : "0.00"
+  };
+}
+
+function renderWinLossStats(){
+
+  const recent200Stats =
+    getWinLossStats(predictionRecords.slice(-200));
+
+  const allTimeStats =
+    getWinLossStats(predictionRecords);
+
+  document.getElementById("recent200Wins").textContent =
+    recent200Stats.wins;
+
+  document.getElementById("recent200Losses").textContent =
+    recent200Stats.losses;
+
+  document.getElementById("recent200WinRate").textContent =
+    recent200Stats.winRate + "%";
+
+  document.getElementById("recent200LossRate").textContent =
+    recent200Stats.lossRate + "%";
+
+  document.getElementById("allTimeWins").textContent =
+    allTimeStats.wins;
+
+  document.getElementById("allTimeLosses").textContent =
+    allTimeStats.losses;
+
+  document.getElementById("allTimeWinRate").textContent =
+    allTimeStats.winRate + "%";
+
+  document.getElementById("allTimeLossRate").textContent =
+    allTimeStats.lossRate + "%";
+}
 
 
 /* =========================================================
