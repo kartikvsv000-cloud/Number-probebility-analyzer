@@ -1199,85 +1199,90 @@ function exportBackup() {
 }
 
 /* Restore results from JSON backup */
+
+
 function importBackup(file) {
-  if (!file) {
-    return;
-  }
+  if (!file) return;
 
   const reader = new FileReader();
 
-  reader.onload = () => {
+  reader.onload = function () {
     try {
       const backup = JSON.parse(reader.result);
 
+      // Support both old and new backup formats
       const imported = Array.isArray(backup)
         ? backup
-        : backup.results;
+        : Array.isArray(backup.numberAnalyzerData)
+          ? backup.numberAnalyzerData
+          : backup.results;
 
       if (
         !Array.isArray(imported) ||
         !imported.every(
-          number =>
-            Number.isInteger(number) &&
-            number >= 0 &&
-            number <= 9
+          n => Number.isInteger(n) && n >= 0 && n <= 9
         )
       ) {
-        throw new Error("Invalid backup format");
+        throw new Error("Invalid backup");
       }
 
-      if (
-        !confirm(
-          "Replace current history with " +
-          imported.length +
-          " imported results?"
-        )
-      ) {
-        return;
-      }
+      if (!confirm(
+        "Restore " + imported.length +
+        " number records? Current history will be replaced."
+      )) return;
 
       const previous = results.slice();
+      const predictionKey = "numberAnalyzerPredictionRecordsV1";
+      const oldPredictions = localStorage.getItem(predictionKey);
 
-      results.splice(
-        0,
-        results.length,
-        ...imported
-      );
+      results.splice(0, results.length, ...imported);
 
       if (!saveResults()) {
-        results.splice(
-          0,
-          results.length,
-          ...previous
-        );
-
+        results.splice(0, results.length, ...previous);
         renderAll();
         return;
       }
 
-      renderAll();
+      if (Array.isArray(backup.predictionRecords)) {
+        try {
+          localStorage.setItem(
+            predictionKey,
+            JSON.stringify(backup.predictionRecords)
+          );
+        } catch (e) {
+          if (oldPredictions === null) {
+            localStorage.removeItem(predictionKey);
+          } else {
+            localStorage.setItem(predictionKey, oldPredictions);
+          }
+          results.splice(0, results.length, ...previous);
+          saveResults();
+          renderAll();
+          showMessage("Could not save prediction records.", "error");
+          return;
+        }
+      }
 
-      showMessage(
-        "Backup restored successfully."
-      );
+      renderAll();
+      showMessage("Backup restored successfully: " +
+        imported.length + " number records.");
+      $("appStatus").textContent = "Backup restored";
+
     } catch (error) {
       showMessage(
-        "Invalid or unreadable JSON backup.",
+        "Backup file invalid or unreadable.",
         "error"
       );
     }
   };
 
-  reader.onerror = () => {
-    showMessage(
-      "Could not read the selected file.",
-      "error"
-    );
+  reader.onerror = function () {
+    showMessage("Could not read backup file.", "error");
   };
 
   reader.readAsText(file);
 }
-
+    
 /* Export results as CSV */
 function exportCSV() {
   const rows = [
